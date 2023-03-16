@@ -1,13 +1,14 @@
 // Requiring the module
-const reader = require('xlsx')
+const reader = require("xlsx");
 
 // Reading tuition file
-const file = reader.readFile('./Majors.xlsx')
-  
-const data = [] //creating array
-  
-const sheets = file.SheetNames
-  
+const file = reader.readFile("./Majors.xlsx");
+
+// Creating array
+const data = [];
+
+const sheets = file.SheetNames;
+
 for(let i = 0; i < sheets.length; i++)
 {
    const temp = reader.utils.sheet_to_json(
@@ -19,50 +20,90 @@ for(let i = 0; i < sheets.length; i++)
 
 var credithrs = 18;
 var inState = false;
+var firstSemester = true;
 var totalClasses = 6;
 var onlineClasses = 3;
 var hybridClasses = 3;
 
-let majorFilter = data.find(t=>t.Majors == "Respiratory Therapy"); //finding fees specific to major
+// Finding fees specific to major
+let majorFilter = data.find(t=>t.Majors == "Respiratory Therapy");
 
-let majorsList = data.map(t=>t.Majors); //mapping array of majors
+// Mapping array of majors
+let majorsList = data.map(t=>t.Majors);
 
 //fees
-var costPerCreditHrIn = (majorFilter['CostPerCreditHourIN']*credithrs);
-var costPerCreditHrOut = (majorFilter['CostPerCreditHourOut']*credithrs);
+var costPerCreditHrIn = (majorFilter["CostPerCreditHourIN"]*credithrs);
+var costPerCreditHrOut = (majorFilter["CostPerCreditHourOut"]*credithrs);
+var onlineLearningFee = (majorFilter["OnlineLearningFee"]*onlineClasses);
+var hybridLearningFee = (majorFilter["HybridFee"]*hybridClasses);
 
-var univServiceFee3OrFewer = majorFilter['UniversityServicesFee3OrFewerCreditHrs']
-var univServiceFee4To7= majorFilter['UniversityServicesFee4To7CreditHours']
-var univService8OrMore = majorFilter['UniversityServicesFee8OrMoreCreditHrs']
-var transportationFee = majorFilter['Transportation']
+var univServiceFee3OrFewer = majorFilter["UniversityServicesFee3OrFewerCreditHrs"];
+var univServiceFee4To7= majorFilter["UniversityServicesFee4To7CreditHours"];
+var univService8OrMore = majorFilter["UniversityServicesFee8OrMoreCreditHrs"];
+var transportationFee = majorFilter["Transportation"];
+var studentActivityFee = majorFilter["StudentActivityFee"];
+var counselingFee = majorFilter["CounselingFee"];
+var assessmentFee = majorFilter["AssessmentFee"];
+var enrollmentFee = majorFilter["EnrollmentFee"];
+var matriculationFee = majorFilter["MatriculationFee"];
 
 //Cost for Desired Credit Hours
 if (inState) {
-   console.log(costPerCreditHrIn);
+   console.log("InState: "+costPerCreditHrIn);
 } else {
-   console.log(costPerCreditHrOut);
+   console.log("OutState: "+costPerCreditHrOut);
 }
 
 //University Services Fee
 if (credithrs <=3) {
-   console.log(univServiceFee3OrFewer)
+   console.log("UnivFee<3: "+univServiceFee3OrFewer)
 } else if (credithrs > 3 && credithrs < 8) {
-   console.log(univServiceFee4To7)
+   console.log("UnivFee4to7: "+univServiceFee4To7);
 } else {
-   console.log(univService8OrMore)
+   console.log("UnivFee8+: "+univService8OrMore);
 }
 
-//Transportation Fee
+//Transportation/Parking Fee
 if(totalClasses > (hybridClasses + onlineClasses)) {
-   console.log(transportationFee)
+   console.log("TransportationFee: "+transportationFee);
 } else {
-   console.log('No transportation fee.')
+   console.log("No transportation fee.");
 }
 
+//Student Activity Fee
+if(totalClasses != onlineClasses) {
+   console.log("StudentActivityFee: "+studentActivityFee);
+} else {
+   console.log("No student activity fee.");
+}
 
+//Counseling Fee
+if(totalClasses > 0) {
+   console.log("CounselingFee: "+counselingFee);
+} else {
+   console.log("No counseling fee.");
+}
 
-//console.log(majorsList);
-//console.log(majorFilter);
+//Fees for first-semester students:
+//Assessment Fee, Enrollment Fee, Matriculation Fee
+if(firstSemester) {
+   console.log("AssessmentFee: "+assessmentFee);
+   console.log("EnrollmentFee: "+enrollmentFee);
+   console.log("MatriculationFee: "+matriculationFee);
+} else {
+   console.log("No Assessment, Enrollment, or Matriculation Fee.");
+}
 
-//printing test calculations
-//console.log(costPerCreditHrIn);
+//Online Learning Fee
+if(onlineClasses > 0) {
+   console.log("OnlineLearningFee: "+onlineLearningFee);
+} else {
+   console.log("No online learning fee.");
+}
+
+//Hybrid Learning Fee
+if(hybridClasses > 0) {
+   console.log("HybridLearningFee: "+hybridLearningFee);
+} else {
+   console.log("No hybrid learning fee");
+}
