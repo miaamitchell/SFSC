@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form</title>
-    <link rel="stylesheet" href=".css">
+    <link rel="stylesheet" href="SFSCCheckin.css">
 </head>
 
 <body>
     <fieldset>
     <!--Heading and Description-->
-    <legend>Welcome to the SFSC Student Checkin Financial Calculator</legend>
+    <h1>Welcome to the SFSC Student Checkin Financial Calculator</h1>
     <h4>
-        Please answer the follower </h4>
+        Please answer the following questions </h4>
     <h4>
-        Do not add special characters into the Quantity and Price Fields such as $, <br>
+        *Do not add special characters into the Quantity and Price Fields such as $, <br>
         leave the fields plain with just numerical values.
     </h4>
 
@@ -28,8 +28,40 @@
                 
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">Name:
-                  <p><input placeholder="First name..." oninput="this.className = ''"></p>
-                  <p><input placeholder="Last name..." oninput="this.className = ''"></p>
+                  <p><input placeholder="Enter your Full Name" oninput="this.className = ''"></p>
+                  <p>What is your major?</p>
+                  <p><select id="mjr">
+                    <option value="0" selected>choose your major</option>
+                  </select></p>
+                  <p>How many credit hours will you be taking?</p>
+                  <p><select name="Number of Credit Hours">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15" selected>15</option>
+                    <option value="16">16</option>
+                    <option value="16">16</option>-
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                  </select></p>
                 </div>
                 
                 <div class="tab">Contact Info:
@@ -38,20 +70,184 @@
                 </div>
                 
                 <div class="tab">Date of Birth:
-                  <p><input placeholder="dd" oninput="this.className = ''"></p>
-                  <p><input placeholder="mm" oninput="this.className = ''"></p>
-                  <p><input placeholder="yyyy" oninput="this.className = ''"></p>
+                  <p><input placeholder="mm/dd/yyyy" oninput="this.className = ''"></p>
+                  <p>What meal plan would you like?</p>
+                  <p><select name="meal plan">
+                    <option id="rp" value="Red plan">red plan</option>
+                    <option id="bp" value="Blue plan">blue plan</option>
+                    <option id="gp" value="Gold plan">gold plan</option>
+                  </select></p>
                 </div>
+                <p>If you live on-campus, what housing option do you have?</p>
+                  <p><select name="housing options">
+                    <option id="rp" value="not">no</option>
+                  </select></p>
+                </div>   
                 
-                <div class="tab">Login Info:
-                  <p><input placeholder="Username..." oninput="this.className = ''"></p>
-                  <p><input placeholder="Password..." oninput="this.className = ''"></p>
+                <div class="tab">How many in-person classes are you taking?
+                  <p><select name="In-Person Classes">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                  </select></p>
+                  <p>How many online classes are you taking??</p>
+                  <p><select name="Online Classes">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                  </select></p>
+                  <p>How many hybrid classes are you taking??</p>
+                  <p><select name="Hybrid Classes">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                  </select></p>
+                  <p>Are you an Indiana Resident?</p>
+                  <p><select name="Indiana Resident">
+                    <option value="yes-resident">no</option>
+                    <option value="no-resident">no</option>
+                  </select></p>
                 </div>
+
+                <div class="tab">How many 100 Level Credit Hours will you be taking?
+                  <p><select name="Number of 100-Level Credit Hours">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                  </select></p>
+                  <p>How many 200 Level Credit Hours will you be taking?</p>
+                  <p><select name="Number of 200-Level Credit Hours">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                  </select></p>
+                  <p>How many 300 Level Credit Hours will you be taking?</p>
+                  <p><select name="Number of 300-Level Credit Hours">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                  </select></p>
+                  <p>How many 400 Level Credit Hours will you be taking?</p>
+                  <p><select name="Number of 400-Level Credit Hours">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                  </select></p>
+                </div>
+
+
                 
                 <div style="overflow:auto;">
                   <div style="float:right;">
-                    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                    <button type="button" id="prevBtn" class="btn-primary" onclick="nextPrev(-1)">Previous</button>
+                    <button type="button" id="nextBtn" class="btn-primary" onclick="nextPrev(1)">Next</button>
                   </div>
                 </div>
                 
@@ -61,18 +257,19 @@
                   <span class="step"></span>
                   <span class="step"></span>
                   <span class="step"></span>
+                  <span class="step"></span>
                 </div>
                 
                 </form>
             </div>
     </div>
-        <!--Buttons for Different Functions-->
+        <!--Buttons for Different Functions
         <div class="button-control">
         <input type="button" onclick="calculate()" value="Calculate"></input>
         <input type="button" value="Reset Data" onclick="resetData()"></input>
         <input type="button" value="Add Row" onclick="addRow()"></input>
         <input type="button" value="Remove Row" onclick="removeRow()"></input>
-        </div>
+        </div>-->
     </form>
     </fieldset>
     <script src="SFSCCheckin.js"></script>
