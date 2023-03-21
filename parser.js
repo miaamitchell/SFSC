@@ -1,23 +1,47 @@
-// Requiring the module
-const reader = require("xlsx");
+//parsing thru xlsx file
+var ExcelToJSON = function() {
 
-// Reading tuition file
-const file = reader.readFile("./Majors.xlsx");
-
-// Creating array
-const data = [];
-
-const sheets = file.SheetNames;
-
-for(let i = 0; i < sheets.length; i++)
-{
-   const temp = reader.utils.sheet_to_json(
-        file.Sheets[file.SheetNames[i]])
-   temp.forEach((res) => {
-      data.push(res)
-   })
-}
-
+   this.parseExcel = function() {
+     var file = "./Majors.xlsx";
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', file, true);
+     xhr.responseType = 'arraybuffer';
+     xhr.onload = function(e) {
+          var data = new Uint8Array(xhr.response);
+          var workbook = XLSX.read(data, {
+             type: 'array'
+          });
+       workbook.SheetNames.forEach(function(sheetName) {
+         // Here is your object
+         var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+         //var json_object = JSON.stringify(XL_row_object); converting to string
+         //console.table(json_object); //displaying strings in table
+ 
+         var column = 'Majors';
+         var dictionary = {};
+         for (var i = 0; i < XL_row_object.length; i++) {
+             var value = XL_row_object[i][column];
+             if (value in dictionary) {
+                dictionary[value].push(XL_row_object[i]);
+             } else {
+                dictionary[value] = [XL_row_object[i]];
+             }
+         }
+         //displays majors and associated dictionaries
+         console.log(dictionary);
+ 
+         //displays table of all majors and fees
+         //console.table(XL_row_object);
+       })
+     };
+     xhr.send();
+   };
+ };
+ 
+ var excelToJSON = new ExcelToJSON();
+ excelToJSON.parseExcel();
+ 
+/*
 var credithrs = 18;
 var inState = false;
 var firstSemester = true;
@@ -107,3 +131,4 @@ if(hybridClasses > 0) {
 } else {
    console.log("No hybrid learning fee");
 }
+*/
