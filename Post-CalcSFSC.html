@@ -1,0 +1,53 @@
+<!--Garrett DiDomizio, Mia Mitchell, Yifei Jiao, Ryan Pritchett Contact: gdidomizio@eagles.usi.edu Last Updated: 3/23/2023-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="SFSCCheckin.css">
+</head>
+
+<body>
+    <fieldset>
+    <!--Start of Form-->
+    <div class="container">
+        <form id="regForm" action="">
+          <h4>Below are your total costs per fee as well as your estimated overall total </h4>
+            <h1>Calculation Estimates:</h1>
+            <!--Where calculation totals will be displayed-->
+            <h3>Cost for Desired Credit Hours.......................................................................</h3>
+            <h3>University Service Fee....................................................................................</h3>
+            <h3>Transportation/ Parking Fee.........................................................................</h3>
+            <h3>Student Activity Fee.......................................................................................</h3>
+            <h3>Archie's Book Bundle.....................................................................................</h3>
+            <h3>Housing Costs..................................................................................................</h3>
+            <h3>Deaconess Plan................................................................................................</h3>
+            <h3>Meal Plan.........................................................................................................</h3>
+            <h2>Total.......................................................................................</h2>
+            
+           <!-- <div class="recalctuit"><button type="button" class="btn-primary" onclick="backtoCheckin()">Calculate Tuition Again</button></div>
+            <div class="print"><button type="button" class="btn-primary" onClick="window.print()">Print this page</button></div>-->
+
+            <div id="outer">
+              <div class="inner"><button type="submit" class="btn-primary" onClick="backtoCheckin()" >Calculate Tuition Again</button></div>
+              <div class="inner"><button type="submit" class="btn-primary" onClick="window.print()">Print Estimate</button></div>
+              <!--<div class="inner"><button class="msgBtnBack">Back</button></div>-->
+            </div>
+            <br>
+            <br>
+            <p>To email yourself this estimate, please enter your email below. </p>
+            <div class="nameinput"><input class="nameinput" placeholder="E-mail..." oninput="this.className = ''"></div>
+            
+            </form>
+
+    </div>
+    </form>
+    </fieldset>
+    <script src="SFSCCheckin.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    </div>
+</body>
+
+</html>
