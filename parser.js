@@ -1,6 +1,6 @@
 var ExcelToJSON = function() {
    this.parseExcel = function() {
-      var file = "./Majors.xlsx";
+      var file = "./Fees.xlsx";
       var xhr = new XMLHttpRequest();
       xhr.open('GET', file, true);
       xhr.responseType = 'arraybuffer';
@@ -9,28 +9,31 @@ var ExcelToJSON = function() {
          var workbook = XLSX.read(data, {
             type: 'array'
          });
+
+      //var majorDictionary = {};
       workbook.SheetNames.forEach(function(sheetName) {
-        // Here is your object
-        var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-        //var json_object = JSON.stringify(XL_row_object); converting to string
-        //console.table(json_object); //displaying strings in table
+      // Here is your object
+      var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+         if (sheetName == 'majorFees') {
+            var majors = XL_row_object.map(t=>t.Majors);
+            var selectElement = document.getElementById('mjr');
+            majors.map(item => mjr.appendChild(new Option(item)).cloneNode(true));
 
-        var majors = XL_row_object.map(t=>t.Majors);
-
-        //populating dictionary
-        var column = 'Majors';
-        var dictionary = {};
-        for (var i = 0; i < XL_row_object.length; i++) {
-            var value = XL_row_object[i][column];
-            if (value in dictionary) {
-               dictionary[value].push(XL_row_object[i]);
-            } else {
-               dictionary[value] = [XL_row_object[i]];
-            }
+            //populating dictionary
+            var column = 'Majors';
+            var majorDictionary = {};
+            for (var i = 0; i < XL_row_object.length; i++) {
+               var value = XL_row_object[i][column];
+               if (value in majorDictionary) {
+                  majorDictionary[value].push(XL_row_object[i]);
+               } else {
+                  majorDictionary[value] = [XL_row_object[i]];
+               }
         }
+      
 
       var major = 'Computer Science';
-      var majorData = dictionary[major];
+      var majorData = majorDictionary[major];
 
       var credithrs = 18;
       var inState = false;
@@ -167,6 +170,7 @@ var ExcelToJSON = function() {
 
       //Athletics Fees
       athleticsFee = majorData[0]['AthleticsFee'];
+      console.log('AthleticsFee: '+athleticsFee);
 
       //Total Semester Cost
 
@@ -176,16 +180,33 @@ var ExcelToJSON = function() {
         //console.log(majors);
 
         //logs majors with dictionaries
-        //console.log(dictionary);
-
-        var majors = XL_row_object.map(t=>t.Majors);
-        var selectElement = document.getElementById('mjr');
-        majors.map(item => mjr.appendChild(new Option(item)).cloneNode(true));
+        //console.log(majorDictionary);
 
         //creates table of all majors and fees
         //console.table(XL_row_object);
-      })
-    };
+   } else if (sheetName == 'housingFees') {
+      var column = 'Housing';
+      var housingDictionary = {};
+      var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+      var housingOptions = XL_row_object.map(t=>t.Housing);
+     // console.log(housingOptions);
+      //populating dictionary
+      for (var i = 0; i < XL_row_object.length; i++) {
+         var value = XL_row_object[i][column];
+         if (value in housingDictionary) {
+            housingDictionary[value].push(XL_row_object[i]);
+         } else {
+            housingDictionary[value] = [XL_row_object[i]];
+         }
+      }
+   }
+      //var housingType = '1 Person/1 Bedroom Apartment';
+      //var housingData = housingDictionary[housingType];
+      console.log(housingDictionary);
+      //housingCost = housingData[0]['Cost'];
+      //console.log("HousingCost: "+housingCost);
+    });
+   };
     xhr.send();
   };
 };
