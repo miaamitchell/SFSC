@@ -5,7 +5,7 @@
 //
 //
 function backtoCheckin(){
-  windows.location.href = "file:///C:/Users/Garrett%20DiDomizio/Documents/CIS477/SFSCCheckin.html";
+  location.replace("SFSCCheckin.html");
 }
 
 var currentTab = 0; // Current tab is set to be the first tab (0)
