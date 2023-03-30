@@ -5,15 +5,16 @@
 //
 //
 function backtoCheckin(){
-  windows.location.href = "file:///C:/Users/Garrett%20DiDomizio/Documents/CIS477/SFSCCheckin.html";
+  location.replace("SFSCCheckin.html");
 }
-
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
 function showTab(n) {
   // This function will display the specified tab of the form ...
   var x = document.getElementsByClassName("tab");
+  console.log(x);
+  console.log(n);
   x[n].style.display = "block";
   // ... and fix the Previous/Next buttons:
   if (n == 0) {
@@ -40,24 +41,29 @@ function nextPrev(n) {
   if (n == 1 && !validateForm()) return false;
   // Hide the current tab:
   x[currentTab].style.display = "none";
+  // if you have reached the end of the form... :
+  if (currentTab == x.length -1) {
+    // Check that the form inputs are valid
+    if(validateForm())
+    {
+      //...change the form action to the new page URL:
+      document.getElementById("regForm").action = "Post-CalcSFSC.html";
+      //...the form gets submitted:
+      document.getElementById("regForm").submit();
+    return false;
+    }
+  }
   // Increase or decrease the current tab by 1:
   currentTab = currentTab + n;
-  // if you have reached the end of the form... :
-  if (currentTab >= x.length) {
-    //...change the form action to the new page URL:
-    document.getElementById("regForm").action = "Post-CalcSFSC.html";
-    //...the form gets submitted:
-    document.getElementById("regForm").submit();
-    return false;
-  }
   // Otherwise, display the correct tab:
   showTab(currentTab);
 }
 
-function validateForm() {
+function validateForm(){
   // This function deals with validation of the form fields
   var x, y, i, valid = true;
   x = document.getElementsByClassName("tab");
+  console.log(x[currentTab]);
   y = x[currentTab].getElementsByTagName("input");
   var selects = x[currentTab].getElementsByTagName("select"); // get all select elements in the current tab
   // A loop that checks every input field and select element in the current tab:
@@ -77,6 +83,7 @@ function validateForm() {
       valid = false; // and set the current valid status to false
     }
   }
+  
   // If the valid status is true, mark the step as finished and valid:
   if (valid) {
     document.getElementsByClassName("step")[currentTab].className += " finish";
@@ -86,13 +93,16 @@ function validateForm() {
 
 //More validation
 // Get references to the select menus
-const inPersonClassesSelect = document.querySelector("select[name='In-Person Classes']");
-const onlineClassesSelect = document.querySelector("select[name='Online Classes']");
-const hybridClassesSelect = document.querySelector("select[name='Hybrid Classes']");
+//const inPersonClassesSelect = document.querySelector("input[name='In-Person Classes']");
+//const onlineClassesSelect = document.querySelector("input[name='Online Classes']");
+//const hybridClassesSelect = document.querySelector("input[name='Hybrid Classes']");
+
+//console.log("In Person log = "+inPersonClassesSelect.value);
+//console.log("In online log = "+onlineClassesSelect.value);
+//console.log("In hybrid log = "+hybridClassesSelect.value);
 
 // Get a reference to the form and prevent it from submitting by default
-const form = document.querySelector("form");
-form.addEventListener("submit", function(event) {
+document.getElementById("regForm").addEventListener("submit", function(event) {
   event.preventDefault();
 
   // Get the selected values from the select menus
@@ -102,14 +112,9 @@ form.addEventListener("submit", function(event) {
   const hybridClasses = parseInt(hybridClassesSelect.value);
 
   // Check that credit hours are greater than 0
-  if (creditHours <= 0) {
+  if (inPersonClasses+onlineClasses+hybridClasses == 0) {
+    console.log("all class types = 0");
     alert("Please select a number of credit hours greater than 0.");
-    return;
-  }
-
-  // Check that at least one of the class options is greater than 0
-  if (inPersonClasses + onlineClasses + hybridClasses <= 0) {
-    alert("Please select at least one in-person, online, or hybrid class.");
     return;
   }
 
@@ -126,5 +131,6 @@ function fixStepIndicator(n) {
   //... and adds the "active" class to the current step:
   x[n].className += " active";
 }
+
 
 

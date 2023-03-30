@@ -13,29 +13,28 @@
     <fieldset>
     <!--Heading and Description-->
     <h1>Welcome to the SFSC Student Checkin Financial Calculator</h1>
+    <!--<h4>All aid estimates are made from fee data as of:</h4>-->
     <h4>
         Please answer the following questions </h4>
     <h4>
-        *Do not add special characters into the Quantity and Price Fields such as $, <br>
-        leave the fields plain with just numerical values.
+        *Do not add special characters into Numerical Input Fields such as "$" or ",". <br>
+        Leave the fields plain with just numerical values.
     </h4>
 
     <!--Start of Form-->
     <div class="container">
-        <form id="regForm" method="POST" action="">
-
-                <h1>Calculate your Tuition:</h1>
+        <form id="regForm"  onSubmit="JavaScript:handleClick()">
                 
+                <h1>Calculate your Tuition:</h1>
                 <!-- One "tab" for each step in the form: -->
-                <div class="tab"><p>Name:</p>
-                  <div class="nameinput"><input class="nameinput" placeholder="Enter your Full Name" oninput="this.className = ''"></div>
+                <div class="tab"><p>What is an estimate of the amount of aid you will recieve for this semester? :</p>
+                  <div class="nameinput"><input class="nameinput" placeholder="Estimated Aid Amount" oninput="this.className = ''"></div>
                   <p>What is your major?</p>
                   <p><select id="mjr">
                     <option value="0" selected>choose your major</option>
                   </select></p>
-                  <p>How many credit hours will you be taking?</p>
+                  <p>How many credit hours will you be taking this semester?</p>
                   <p><select name="Number of Credit Hours">
-                    <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -64,7 +63,7 @@
                   </select></p>
                 </div>
                   
-                
+                <!--Second tab-->
                 <div class="tab"><p>How many in-person classes are you taking?</p>
                   <p><select name="In-Person Classes">
                     <option value="0">0</option>
@@ -104,7 +103,7 @@
                     <option value="no-resident">no</option>
                   </select></p>
                 </div>
-
+                <!--third tab-->
                 <div class="tab"><p>How many 100 Level Credit Hours will you be taking?</p>
                   <p><select name="Number of 100-Level Credit Hours">
                     <option value="0">0</option>
@@ -222,7 +221,7 @@
                     <option value="24">24</option>
                   </select></p>
                 </div>
-
+                <!--fourth tab-->
                 <div class="tab">
                   <p>What meal plan would you like?</p>
                   <p><select name="meal plan">
