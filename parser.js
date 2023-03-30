@@ -19,7 +19,7 @@ var ExcelToJSON = function() {
       // Here is your object
       var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
          if (sheetName == 'majorFees') {
-            //mapping list of majors & adding to selection for dropdown
+            //mapping list of majors & adding to dropdown selection
             var majors = XL_row_object.map(t=>t.Majors);
             var selectElement = document.getElementById('mjr');
             majors.map(item => mjr.appendChild(new Option(item)).cloneNode(true));
@@ -190,11 +190,10 @@ var ExcelToJSON = function() {
    } else if (sheetName == 'housingFees') {
       var column = 'Housing';
       var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-      //mapping list of housings options & adding to selection for dropdown
+      //mapping list of housings options & adding to dropdown selection
       var housing = XL_row_object.map(t=>t.Housing);
       var selectElement = document.getElementById('house');
       housing.map(item => house.appendChild(new Option(item)).cloneNode(true));
-      
 
       //populating dictionary
       for (var i = 0; i < XL_row_object.length; i++) {
@@ -211,7 +210,27 @@ var ExcelToJSON = function() {
       housingCost = housingData[0]['Cost'];
       console.log('HousingCost: '+housingCost);
    } else if (sheetName == 'mealPlans') {
+      var column = 'MealPlan';
+      var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+      //mapping list of meal plans & adding to dropdown selection
+      var meals = XL_row_object.map(t=>t.MealPlan);
+      var selectElement = document.getElementById('meal');
+      meals.map(item => meal.appendChild(new Option(item)).cloneNode(true));
 
+      //populating dictionary
+      for (var i = 0; i < XL_row_object.length; i++) {
+         var value = XL_row_object[i][column];
+         if (value in mealDictionary) {
+            mealDictionary[value].push(XL_row_object[i]);
+         } else {
+            mealDictionary[value] = [XL_row_object[i]];
+         }
+      }
+      var mealPlan = 'Blue Eagle';
+      var mealData = mealDictionary[mealPlan];
+
+      mealPlanCost = mealData[0]['Cost'];
+      console.log('MealPlanCost: '+mealPlanCost);
    }
       });
    };
