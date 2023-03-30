@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>page title</title>
+<style>
+Body{background-color: black;}
+H3{text-align:center}
+
+</style>
+
+</head>
+<body style="background-color:powderblue;">
+
+
+<!-- this is the option-->
+
+<details>
+  <summary>credits fee</summary>
+  <p>Here is some additional information about the content.</p>
+</details>
+
+
+<!-- this is second option-->
+
+<!--<button onclick="document.getElementById('popup').showModal()">Clickable Content</button>-->
+<button style="background: none; border: none; color: blue; text-decoration: underline; cursor: pointer;" onclick="document.getElementById('popup').showModal()">Click for More Information</button>
+
+<dialog id="popup">
+  <h2>Additional Information</h2>
+  <p>Here is some additional information about the content.</p>
+  <button onclick="document.getElementById('popup').close()">C</button>
+</dialog>
+
+
+<!-- this is hover version-->
+
+<style>
+  .hover-effect {
+    position: relative;
+  }
+  
+  .hover-effect:hover .info {
+    display: block;
+  }
+  
+  .info {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: red;
+    padding: 10px;
+    border: 1px solid black;
+  }
+</style>
+
+<div class="hover-effect">
+  Hover over me!
+  <div class="info" style="color:white;">Here is some additional information.</div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
