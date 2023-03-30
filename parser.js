@@ -10,18 +10,22 @@ var ExcelToJSON = function() {
             type: 'array'
          });
 
-      //var majorDictionary = {};
+      //creating empty arrays to store each dictionary
+      var majorDictionary = {};
+      var housingDictionary = {};
+      var mealDictionary = {};
+
       workbook.SheetNames.forEach(function(sheetName) {
       // Here is your object
       var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
          if (sheetName == 'majorFees') {
+            //mapping list of majors & adding to selection for dropdown
             var majors = XL_row_object.map(t=>t.Majors);
             var selectElement = document.getElementById('mjr');
             majors.map(item => mjr.appendChild(new Option(item)).cloneNode(true));
 
-            //populating dictionary
+            //populating dictionaries based on column key
             var column = 'Majors';
-            var majorDictionary = {};
             for (var i = 0; i < XL_row_object.length; i++) {
                var value = XL_row_object[i][column];
                if (value in majorDictionary) {
@@ -30,7 +34,6 @@ var ExcelToJSON = function() {
                   majorDictionary[value] = [XL_row_object[i]];
                }
         }
-      
 
       var major = 'Computer Science';
       var majorData = majorDictionary[major];
@@ -186,10 +189,13 @@ var ExcelToJSON = function() {
         //console.table(XL_row_object);
    } else if (sheetName == 'housingFees') {
       var column = 'Housing';
-      var housingDictionary = {};
       var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-      var housingOptions = XL_row_object.map(t=>t.Housing);
-     // console.log(housingOptions);
+      //mapping list of housings options & adding to selection for dropdown
+      var housing = XL_row_object.map(t=>t.Housing);
+      var selectElement = document.getElementById('house');
+      housing.map(item => house.appendChild(new Option(item)).cloneNode(true));
+      
+
       //populating dictionary
       for (var i = 0; i < XL_row_object.length; i++) {
          var value = XL_row_object[i][column];
@@ -199,13 +205,15 @@ var ExcelToJSON = function() {
             housingDictionary[value] = [XL_row_object[i]];
          }
       }
+      var housing = '1 Person/1 Bedroom Apartment';
+      var housingData = housingDictionary[housing];
+   
+      housingCost = housingData[0]['Cost'];
+      console.log('HousingCost: '+housingCost);
+   } else if (sheetName == 'mealPlans') {
+
    }
-      //var housingType = '1 Person/1 Bedroom Apartment';
-      //var housingData = housingDictionary[housingType];
-      console.log(housingDictionary);
-      //housingCost = housingData[0]['Cost'];
-      //console.log("HousingCost: "+housingCost);
-    });
+      });
    };
     xhr.send();
   };
