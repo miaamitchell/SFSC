@@ -53,23 +53,23 @@ var ExcelToJSON = function() {
       
       //Cost for desired credit hours
       if (inState) {
-         costPerCreditHrIn = (majorData[0]['CostPerCreditHourIN']) * credithrs;
-         console.log("InState: "+costPerCreditHrIn);
+         costPerCreditHr = (majorData[0]['CostPerCreditHourIN']) * credithrs;
+         console.log("InState: "+costPerCreditHr);
       } else {
-         costPerCreditHrOut = (majorData[0]['CostPerCreditHourOut']) * credithrs;
-         console.log("OutState: "+costPerCreditHrOut);
+         costPerCreditHr = (majorData[0]['CostPerCreditHourOut']) * credithrs;
+         console.log("OutState: "+costPerCreditHr);
       }
 
       //University Services Fee
       if (credithrs <=3) {
-         univServiceFee3OrFewer = majorData[0]['UniversityServicesFee3OrFewerCreditHrs'];
-         console.log("UnivFee<3: "+univServiceFee3OrFewer);
+         univServiceFee = majorData[0]['UniversityServicesFee3OrFewerCreditHrs'];
+         console.log("UnivFee<3: "+univServiceFee);
       } else if (credithrs > 3 && credithrs < 8) {
-         univServiceFee4To7 = majorData[0]['UniversityServicesFee4To7CreditHours'];
-         console.log("UnivFee4to7: "+univServiceFee4To7);
+         univServiceFee = majorData[0]['UniversityServicesFee4To7CreditHours'];
+         console.log("UnivFee4to7: "+univServiceFee);
       } else {
-         univService8OrMore = majorData[0]['UniversityServicesFee8OrMoreCreditHrs'];
-         console.log("UnivFee8+: "+univService8OrMore);
+         univServiceFee = majorData[0]['UniversityServicesFee8OrMoreCreditHrs'];
+         console.log("UnivFee8+: "+univServiceFee);
       }
 
       //Transportation/Parking Fee
@@ -126,11 +126,11 @@ var ExcelToJSON = function() {
 
       //Hybrid Learning Fee
       if(hybridClasses > 0) {
-         hybridLearningFee = (majorData[0]['HybridFee']) * hybridClasses;
-         console.log("HybridLearningFee: "+hybridLearningFee);
+         hybridFee = (majorData[0]['HybridFee']) * hybridClasses;
+         console.log("HybridLearningFee: "+hybridFee);
       } else {
-         HybridFee = 0;
-         console.log("HybridLearningFee: "+HybridFee);
+         hybridFee = 0;
+         console.log("HybridLearningFee: "+hybridFee);
       }
 
       //Non-resident Distance Education Fee
@@ -175,8 +175,13 @@ var ExcelToJSON = function() {
       athleticsFee = majorData[0]['AthleticsFee'];
       console.log('AthleticsFee: '+athleticsFee);
 
-      //Total Semester Cost
+      function addNumbers(...nums) {
+         return nums.reduce((total, num) => total + Number(num), 0);
+       }
 
+      //Total Semester Cost for Major
+      majorCost = addNumbers(costPerCreditHr+univServiceFee+programFee+studentActivityFee+counselingFee+transportationFee+assessmentFee+enrollmentFee+matriculationFee+onlineFee+hybridFee+housingActivityFee+deaconessPlan+archieBundle+athleticsFee);
+      console.log('Total Cost for Major: '+majorCost);
 
 
         //logs list of majors
@@ -234,6 +239,7 @@ var ExcelToJSON = function() {
    }
       });
    };
+    totalCost = 
     xhr.send();
   };
 };
