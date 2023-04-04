@@ -22,20 +22,19 @@
 
     <!--Start of Form-->
     <div class="container">
-        <form id="regForm" method="POST" action="">
+      <form id="regForm"  onSubmit="JavaScript:sessionSave()">
 
                 <h1>Calculate your Tuition:</h1>
                 
                 <!-- One "tab" for each step in the form: -->
-                <div class="tab"><p>Name:</p>
-                  <div class="nameinput"><input class="nameinput" placeholder="Enter your Full Name" oninput="this.className = ''"></div>
+                <div class="tab"><p>What is an estimate of the amount of aid you will receive for this semester?</p>
+                  <div class="nameinput"><input type="number" min="0" max="100000" class="nameinput" placeholder="Estimated Aid Amount" oninput="this.className = ''"></div>
                   <p>What is your major?</p>
                   <p><select id="mjr">
                     <option value="0" selected>choose your major</option>
                   </select></p>
                   <p>How many credit hours will you be taking?</p>
                   <p><select name="Number of Credit Hours">
-                    <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -64,7 +63,7 @@
                   </select></p>
                 </div>
                   
-                
+                <!--Second tab-->
                 <div class="tab"><p>How many in-person classes are you taking?</p>
                   <p><select name="In-Person Classes">
                     <option value="0">0</option>
@@ -104,7 +103,7 @@
                     <option value="no-resident">no</option>
                   </select></p>
                 </div>
-
+                <!--third tab-->
                 <div class="tab"><p>How many 100 Level Credit Hours will you be taking?</p>
                   <p><select name="Number of 100-Level Credit Hours">
                     <option value="0">0</option>
@@ -222,13 +221,13 @@
                     <option value="24">24</option>
                   </select></p>
                 </div>
-
+                <!--fourth tab-->
                 <div class="tab">
-                  <p>Choose a meal plan.</p>
+                  <p>Please choose a meal plan.</p>
                   <p><select id="meal">
                     <option value="0" selected>Select a meal plan</option>
                   </select></p>
-                  <p>Choose a housing situation.</p>
+                  <p>Please choose a housing situation.</p>
                   <p><select id="house">
                     <option value="0" selected>Select a housing option</option>
                   </select></p>
