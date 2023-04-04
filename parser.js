@@ -1,4 +1,5 @@
 var ExcelToJSON = function() {
+   //parsing XLSX
    this.parseExcel = function() {
       var file = "./Fees.xlsx";
       var xhr = new XMLHttpRequest();
@@ -38,6 +39,7 @@ var ExcelToJSON = function() {
       var major = 'Computer Science';
       var majorData = majorDictionary[major];
 
+      //placeholders
       var credithrs = 18;
       var inState = false;
       var firstSemester = true;
@@ -50,6 +52,11 @@ var ExcelToJSON = function() {
       var classes200 = 0;
       var classes300 = 1;
       var classes400 = 2;
+
+      //converts to number data type to add together
+      function addNumbers(...nums) {
+         return nums.reduce((total, num) => total + Number(num), 0);
+       }
       
       //Cost for desired credit hours
       if (inState) {
@@ -180,9 +187,8 @@ var ExcelToJSON = function() {
        }
 
       //Total Semester Cost for Major
-      majorCost = addNumbers(costPerCreditHr+univServiceFee+programFee+studentActivityFee+counselingFee+transportationFee+assessmentFee+enrollmentFee+matriculationFee+onlineFee+hybridFee+housingActivityFee+deaconessPlan+archieBundle+athleticsFee);
+      majorCost = addNumbers(costPerCreditHr,univServiceFee,programFee,studentActivityFee,counselingFee,transportationFee,assessmentFee,enrollmentFee,matriculationFee,onlineFee,hybridFee,housingActivityFee,deaconessPlan,archieFee,athleticsFee);
       console.log('Total Cost for Major: '+majorCost);
-
 
         //logs list of majors
         //console.log(majors);
@@ -238,8 +244,9 @@ var ExcelToJSON = function() {
       console.log('MealPlanCost: '+mealPlanCost);
    }
       });
+      totalCost = Number(majorCost)+Number(housingCost)+Number(mealPlanCost);
+      console.log('Total Cost: '+totalCost);
    };
-    totalCost = 
     xhr.send();
   };
 };
