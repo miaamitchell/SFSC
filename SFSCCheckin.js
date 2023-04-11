@@ -110,6 +110,7 @@ document.getElementById("regForm").addEventListener("submit", function(event) {
   const creditHours = parseInt(creditHoursSelect.value);
   const inPersonClasses = parseInt(inPersonClassesSelect.value);
   const onlineClasses = parseInt(onlineClassesSelect.value);
+  const selectedfirstsemres = true;
   const hybridClasses = parseInt(hybridClassesSelect.value);
   const estimatedAid = parseInt(estimatedAidSelect.value);
   const mjrSelect = true;
@@ -148,6 +149,7 @@ function sessionSave(){
 var estaid = document.getElementsByName("aidinputted")[0].value;
 var selectedmajor = document.getElementById("mjr").options[document.getElementById("mjr").selectedIndex];
 var selectedCreditHours = document.getElementsByName("Number of Credit Hours")[0].value;
+var selectedfirstSemester = document.getElementById("firstSem").options[document.getElementById("firstSem").selectedIndex];
 var selectedinPersonClasses = document.getElementsByName("In-Person Classes")[0].value;
 var selectedonlineClasses = document.getElementsByName("Online Classes")[0].value;
 var selectedhybridClasses = document.getElementsByName("Hybrid Classes")[0].value;
@@ -164,6 +166,7 @@ var selectedarchiesPlan = document.getElementById("archiesBB").options[document.
 sessionStorage.setItem("estimatedAid", estaid);
 sessionStorage.setItem("mjrSelect", selectedmajor.text);
 sessionStorage.setItem("creditHours", selectedCreditHours);
+sessionStorage.setItem("selectedfirstsemres", selectedfirstSemester.text);
 sessionStorage.setItem("inPersonClasses", selectedinPersonClasses);
 sessionStorage.setItem("onlineClasses", selectedonlineClasses);
 sessionStorage.setItem("hybridClasses", selectedhybridClasses);

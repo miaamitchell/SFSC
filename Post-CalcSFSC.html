@@ -26,7 +26,7 @@
             <h3>Deaconess Plan................................................................................................</h3>
             <h3>Meal Plan.........................................................................................................</h3>
             <h2>Total.......................................................................................</h2>
-            
+            <h2>You are taking <span id="selectedCreditHours"></span></span> this semester!</h2>
            <!-- <div class="recalctuit"><button type="button" class="btn-primary" onclick="backtoCheckin()">Calculate Tuition Again</button></div>
             <div class="print"><button type="button" class="btn-primary" onClick="window.print()">Print this page</button></div>-->
 
@@ -55,6 +55,8 @@
     console.log(mjrSelect);
     var credithours = sessionStorage.getItem("creditHours");
     console.log(credithours);
+    var selectedfirstsemres = sessionStorage.getItem("selectedfirstsemres");
+    console.log(selectedfirstsemres)
     var inPersonClasses = sessionStorage.getItem("inPersonClasses");
     console.log(inPersonClasses);
     var onlineClasses = sessionStorage.getItem("onlineClasses");
