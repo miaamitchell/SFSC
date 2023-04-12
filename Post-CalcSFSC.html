@@ -49,10 +49,28 @@
       function backtoCheckin(){
       location.replace("SFSCCheckin.html");
     }
+
+    var estimatedAid = sessionStorage.getItem("estimatedAid");
+    var mjrSelect = sessionStorage.getItem("mjrSelect");
+    var credithours = sessionStorage.getItem("creditHours");
+    var firstSemester = sessionStorage.getItem("firstSemester");
+    var inPersonClasses = sessionStorage.getItem("inPersonClasses");
+    var onlineClasses = sessionStorage.getItem("onlineClasses");
+    var hybridClasses = sessionStorage.getItem("hybridClasses");
+    var InRes = sessionStorage.getItem("InRes");
+    var oneHundred = sessionStorage.getItem("oneHundred");
+    var twoHundred = sessionStorage.getItem("twoHundred");
+    var threeHundred = sessionStorage.getItem("threeHundred");
+    var fourHundred = sessionStorage.getItem("fourHundred");
+    var mealPlan = sessionStorage.getItem("mealPlan");
+    var housingPlan = sessionStorage.getItem("housingPlan");
+    var archiesBundle = sessionStorage.getItem("archiesBundle");
+
     </script>
     <script src="SFSCCheckin.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <script src="calculations.js" type="module"></script>
     </div>
 </body>
 

@@ -24,9 +24,7 @@ function showTab(n) {
     document.getElementById("prevBtn").style.display = "inline";
   }
   if (n == (x.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Submit"
-    
-    ; 
+    document.getElementById("nextBtn").innerHTML = "Submit"; 
   } else {
     document.getElementById("nextBtn").innerHTML = "Next";
   }
@@ -46,6 +44,7 @@ function nextPrev(n) {
     // Check that the form inputs are valid
     if(validateForm())
     {
+      sessionSave();
       //...change the form action to the new page URL:
       document.getElementById("regForm").action = "Post-CalcSFSC.html";
       //...the form gets submitted:
@@ -109,7 +108,18 @@ document.getElementById("regForm").addEventListener("submit", function(event) {
   const creditHours = parseInt(creditHoursSelect.value);
   const inPersonClasses = parseInt(inPersonClassesSelect.value);
   const onlineClasses = parseInt(onlineClassesSelect.value);
+  const firstSemester = true;
   const hybridClasses = parseInt(hybridClassesSelect.value);
+  const estimatedAid = parseInt(estimatedAidSelect.value);
+  const mjrSelect = true;
+  const InRes = true; 
+  const oneHundred = parseInt(selectedoneHundredSelect.value);
+  const twoHundred = parseInt(selectedtwoHundredSelect.value);
+  const threeHundred = parseInt(selectedthreeHundred.value);
+  const fourHundred = parseInt(selectedfourHundred.value);
+  const mealPlan = true;
+  const housingPlan = true;
+  const archiesBundle = true;
 
   // Check that credit hours are greater than 0
   if (inPersonClasses+onlineClasses+hybridClasses == 0) {
@@ -132,5 +142,42 @@ function fixStepIndicator(n) {
   x[n].className += " active";
 }
 
-
-
+function sessionSave(){
+// Get the selected value from the "Number of Credit Hours" dropdown
+  var estaid = document.getElementsByName("aidinputted")[0].value;
+  var selectedmajor = document.getElementById("mjr").options[document.getElementById("mjr").selectedIndex];
+  var selectedCreditHours = document.getElementsByName("Number of Credit Hours")[0].value;
+  var selectedfirstSemester = document.getElementById("firstSem").options[document.getElementById("firstSem").selectedIndex];
+  var selectedinPersonClasses = document.getElementsByName("In-Person Classes")[0].value;
+  var selectedonlineClasses = document.getElementsByName("Online Classes")[0].value;
+  var selectedhybridClasses = document.getElementsByName("Hybrid Classes")[0].value;
+  var selectedindianaResident = document.getElementById("InRes").options[document.getElementById("InRes").selectedIndex];
+  var selectedhundredLevel = document.getElementsByName("Number of 100-Level Credit Hours")[0].value;
+  var selectedtwohundredLevel = document.getElementsByName("Number of 200-Level Credit Hours")[0].value;
+  var selectedthreehundredLevel = document.getElementsByName("Number of 300-Level Credit Hours")[0].value;
+  var selectedfourhundredLevel = document.getElementsByName("Number of 400-Level Credit Hours")[0].value;
+  var selectedmealPlan = document.getElementById("mealPlan").options[document.getElementById("mealPlan").selectedIndex];
+  var selectedhousingPlan = document.getElementById("housing").options[document.getElementById("housing").selectedIndex];
+  var selectedarchiesPlan = document.getElementById("archiesBB").options[document.getElementById("archiesBB").selectedIndex];
+  
+  // Store the selected value in sessionStorage
+  sessionStorage.setItem("estimatedAid", estaid);
+  sessionStorage.setItem("mjrSelect", selectedmajor.text);
+  sessionStorage.setItem("creditHours", selectedCreditHours);
+  sessionStorage.setItem("firstSemester", selectedfirstSemester.text);
+  sessionStorage.setItem("inPersonClasses", selectedinPersonClasses);
+  sessionStorage.setItem("onlineClasses", selectedonlineClasses);
+  sessionStorage.setItem("hybridClasses", selectedhybridClasses);
+  sessionStorage.setItem("InRes", selectedindianaResident.text);
+  sessionStorage.setItem("oneHundred", selectedhundredLevel);
+  sessionStorage.setItem("twoHundred", selectedtwohundredLevel);
+  sessionStorage.setItem("threeHundred", selectedthreehundredLevel);
+  sessionStorage.setItem("fourHundred", selectedfourhundredLevel);
+  sessionStorage.setItem("mealPlan", selectedmealPlan.text);
+  sessionStorage.setItem("housingPlan", selectedhousingPlan.text);
+  sessionStorage.setItem("archiesBundle", selectedarchiesPlan.text);
+  
+  // Use the stored value in your JavaScript code
+  //console.log("Number of credit hours selected: " + selectedCreditHours);
+  //console.log("The number of in person credit hours is: " + selectedinPersonClasses);
+  }

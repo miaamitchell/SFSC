@@ -13,6 +13,7 @@
     <fieldset>
     <!--Heading and Description-->
     <h1>Welcome to the SFSC Student Checkin Financial Calculator</h1>
+    <!--<h4>All aid estimates are made from fee data as of:</h4>-->
     <h4>
         Please answer the following questions </h4>
     <h4>
@@ -25,13 +26,12 @@
       <form id="regForm"  onSubmit="JavaScript:sessionSave()">
 
                 <h1>Calculate your Tuition:</h1>
-                
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab"><p>What is an estimate of the amount of aid you will receive for this semester?</p>
                   <div class="nameinput"><input type="number" min="0" max="100000" class="nameinput" placeholder="Estimated Aid Amount" oninput="this.className = ''"></div>
                   <p>What is your major?</p>
                   <p><select id="mjr">
-                    <option value="0" selected>choose your major</option>
+                    <option value="1" selected>choose your major</option>
                   </select></p>
                   <p>How many credit hours will you be taking?</p>
                   <p><select name="Number of Credit Hours">
@@ -60,6 +60,11 @@
                     <option value="22">22</option>
                     <option value="23">23</option>
                     <option value="24">24</option>
+                  </select></p>
+                  <p>Is this your first semester?</p>
+                  <p><select id="firstSem" name="firstSemester">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
                   </select></p>
                 </div>
                   
@@ -98,9 +103,9 @@
                     <option value="7">7</option>
                   </select></p>
                   <p>Are you an Indiana Resident?</p>
-                  <p><select name="Indiana Resident">
-                    <option value="yes-resident">yes</option>
-                    <option value="no-resident">no</option>
+                  <p><select id="InRes" name="Indiana Resident">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
                   </select></p>
                 </div>
                 <!--third tab-->
@@ -232,9 +237,9 @@
                     <option value="0" selected>Select a housing option</option>
                   </select></p>
                   <p>Do you have Archie's Book Bundle?</p>
-                  <p><select name="Indiana Resident">
-                    <option value="yes-resident">yes</option>
-                    <option value="no-resident">no</option>
+                  <p><select id="archiesBundle" name="Archie's Book Bundle">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
                   </select></p>
                 </div> 
 
@@ -262,8 +267,9 @@
     </fieldset>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
-    <script src="parser.js"></script>
+    <script src="parser.js" type = "module"></script>
     <script src="SFSCCheckin.js"></script>
+    <!--<script src="calculations.js"></script>-->
     </div>
 </body>
 
