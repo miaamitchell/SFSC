@@ -28,7 +28,7 @@
                 <h1>Calculate your Tuition:</h1>
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab"><p>What is an estimate of the amount of aid you will receive for this semester?</p>
-                  <div class="nameinput"><input type="number" min="0" max="100000" class="nameinput" placeholder="Estimated Aid Amount" oninput="this.className = ''"></div>
+                  <div class="nameinput"><input type="number" min="0" max="100000" class="nameinput" placeholder="Estimated Aid Amount" name="aidinputted" oninput="this.className = ''"></div>
                   <p>What is your major?</p>
                   <p><select id="mjr">
                     <option value="1" selected>choose your major</option>
@@ -229,15 +229,15 @@
                 <!--fourth tab-->
                 <div class="tab">
                   <p>Please choose a meal plan.</p>
-                  <p><select id="meal">
+                  <p><select id="meal" name="mealPlan">
                     <option value="0" selected>Select a meal plan</option>
                   </select></p>
                   <p>Please choose a housing situation.</p>
-                  <p><select id="house">
+                  <p><select id="house" name="housing">
                     <option value="0" selected>Select a housing option</option>
                   </select></p>
                   <p>Do you have Archie's Book Bundle?</p>
-                  <p><select id="archiesBundle" name="Archie's Book Bundle">
+                  <p><select id="archiesBundle" name="archiesBB">
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                   </select></p>
@@ -267,7 +267,7 @@
     </fieldset>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
-    <script src="parser.js" type = "module"></script>
+    <script src="parser.js"></script>
     <script src="SFSCCheckin.js"></script>
     <!--<script src="calculations.js"></script>-->
     </div>

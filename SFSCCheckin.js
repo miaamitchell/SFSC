@@ -156,13 +156,14 @@ function sessionSave(){
   var selectedtwohundredLevel = document.getElementsByName("Number of 200-Level Credit Hours")[0].value;
   var selectedthreehundredLevel = document.getElementsByName("Number of 300-Level Credit Hours")[0].value;
   var selectedfourhundredLevel = document.getElementsByName("Number of 400-Level Credit Hours")[0].value;
-  var selectedmealPlan = document.getElementById("mealPlan").options[document.getElementById("mealPlan").selectedIndex];
-  var selectedhousingPlan = document.getElementById("housing").options[document.getElementById("housing").selectedIndex];
-  var selectedarchiesPlan = document.getElementById("archiesBB").options[document.getElementById("archiesBB").selectedIndex];
+  var selectedmealPlan = document.getElementById("meal").options[document.getElementById("meal").selectedIndex];
+  var selectedhousingPlan = document.getElementById("house").options[document.getElementById("house").selectedIndex];
+  var selectedarchiesPlan = document.getElementById("archiesBundle").options[document.getElementById("archiesBundle").selectedIndex];
   
   // Store the selected value in sessionStorage
   sessionStorage.setItem("estimatedAid", estaid);
   sessionStorage.setItem("mjrSelect", selectedmajor.text);
+  console.log(selectedmajor);
   sessionStorage.setItem("creditHours", selectedCreditHours);
   sessionStorage.setItem("firstSemester", selectedfirstSemester.text);
   sessionStorage.setItem("inPersonClasses", selectedinPersonClasses);
