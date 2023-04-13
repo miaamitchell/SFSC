@@ -49,7 +49,7 @@ input.invalid {
   background-color: #68e5b7;
 }
 /*Font */
-h1, h3, h4, h2, p {
+h1, h3, h4, h6, h2, p {
     font-family: Outfit,sans-serif;
     text-align: center;
 }
