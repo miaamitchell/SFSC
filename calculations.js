@@ -2,12 +2,9 @@ function addNumbers(...nums) {
    return nums.reduce((total, num) => total + Number(num), 0);
 }
 
-
 function sleep(milliseconds) {  
   return new Promise(resolve => setTimeout(resolve, milliseconds));  
 }  
-
-
 
 async function performcalc() 
 {      
@@ -22,7 +19,6 @@ async function performcalc()
       
       console.log(major);
       console.log(majorData);
- 
 
       var estimatedAid = sessionStorage.getItem("estimatedAid");
       var creditHours = sessionStorage.getItem("creditHours");
@@ -37,9 +33,10 @@ async function performcalc()
       var mealPlan = sessionStorage.getItem("mealPlan");
       var housingPlan = sessionStorage.getItem("housingPlan");
       var archieBundle = sessionStorage.getItem("archiesBundle");
-      
+      console.log(archieBundle);
+      console.log(inState);
    //Cost for desired credit hours
-   if (inState) {
+   if (inState == "Yes") {
       costPerCreditHr = (majorData[0]['CostPerCreditHourIN']) * creditHours;
    } else {
       costPerCreditHr = (majorData[0]['CostPerCreditHourOut']) * creditHours;
@@ -118,8 +115,8 @@ async function performcalc()
    }
 
    //Archie's Book Bundle
-   if(archieBundle) {
-      archieFee = majorData[0]['ArchiesBookBundle'];
+   if(archieBundle == "Yes") {
+      archieFee = (majorData[0]['ArchiesBookBundle'])*creditHours;
    } else {
       archieFee = 0;
    }
@@ -137,7 +134,6 @@ async function performcalc()
    //Total Semester Cost for Major
    majorCost = addNumbers(costPerCreditHr,univServiceFee,programFee,studentActivityFee,counselingFee,transportationFee,assessmentFee,enrollmentFee,matriculationFee,onlineFee,hybridFee,housingActivityFee,deaconessPlan,archieFee,athleticsFee);
 
-   console.log(housingPlan);
    var housingData = housingDictionary[housingPlan];
 
    housingCost = housingData[0]['Cost'];
@@ -149,10 +145,20 @@ async function performcalc()
    totalCost = addNumbers(majorCost,housingCost,mealPlanCost);
    grandTotal = totalCost - estimatedAid;
 
-   window.sessionStorage.setItem('totalCost',totalCost);
+   //window.sessionStorage.setItem('totalCost',totalCost);
 
    // JM Note: Set a value just to show we can make it work....Ryan has code to add/replace this.
-   document.getElementById("headertag").innerHTML = "Total Cost: $"+totalCost;
+   document.getElementById("credithrcostid").innerHTML = "Cost for Desired Credit Hours: $"+majorCost;
+   document.getElementById("univserviceid").innerHTML = "University Service Fee: $"+univServiceFee;
+   document.getElementById("transportationid").innerHTML = "Transportation/Parking Fee: $"+transportationFee;
+   document.getElementById("studentactivityid").innerHTML = "Student Activity Fee: $"+studentActivityFee;
+   document.getElementById("archiebundleid").innerHTML = "Archie's Book Bundle: $"+archieFee;
+   document.getElementById("housingplanid").innerHTML = "Housing Costs: $"+housingCost;
+   document.getElementById("deaconessid").innerHTML = "Deaconess Plan: $"+deaconessPlan;
+   document.getElementById("mealplanid").innerHTML = "Meal Plan: $"+mealPlanCost;
+   document.getElementById("totalcostid").innerHTML = "Total Cost: $"+totalCost;
+   document.getElementById("aidid").innerHTML = "Estimated Financial Aid: $"+estimatedAid;
+   document.getElementById("grandtotalid").innerHTML = "Grand Total: $"+grandTotal;
 
 }  
 performcalc();
