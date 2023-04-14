@@ -1,4 +1,4 @@
-<!--Garrett DiDomizio, Mia Mitchell, Yifei Jiao, Ryan Pritchett Contact: gdidomizio@eagles.usi.edu Last Updated: 2/08/2023-->
+<!--Garrett DiDomizio, Mia Mitchell, Yifei Jiao, Ryan Pritchett Contact: gdidomizio@eagles.usi.edu Last Updated: 3/23/2023-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +13,7 @@
     <fieldset>
     <!--Heading and Description-->
     <h1>Welcome to the SFSC Student Checkin Financial Calculator</h1>
+    <!--<h4>All aid estimates are made from fee data as of:</h4>-->
     <h4>
         Please answer the following questions </h4>
     <h4>
@@ -22,20 +23,18 @@
 
     <!--Start of Form-->
     <div class="container">
-        <form id="regForm" action="">
+      <form id="regForm"  onSubmit="JavaScript:sessionSave()">
 
                 <h1>Calculate your Tuition:</h1>
-                
                 <!-- One "tab" for each step in the form: -->
-                <div class="tab">Name:
-                  <p><input placeholder="Enter your Full Name" oninput="this.className = ''"></p>
+                <div class="tab"><p>What is an estimate of the amount of aid you will receive for this semester?</p>
+                  <div class="nameinput"><input type="number" min="0" max="100000" class="nameinput" placeholder="Estimated Aid Amount" name="aidinputted" oninput="this.className = ''"></div>
                   <p>What is your major?</p>
                   <p><select id="mjr">
-                    <option value="0" selected>choose your major</option>
+                    <option value="1" selected>choose your major</option>
                   </select></p>
                   <p>How many credit hours will you be taking?</p>
                   <p><select name="Number of Credit Hours">
-                    <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -62,29 +61,15 @@
                     <option value="23">23</option>
                     <option value="24">24</option>
                   </select></p>
-                </div>
-                
-                <div class="tab">Contact Info:
-                  <p><input placeholder="E-mail..." oninput="this.className = ''"></p>
-                  <p><input placeholder="Phone..." oninput="this.className = ''"></p>
-                </div>
-                
-                <div class="tab">Date of Birth:
-                  <p><input placeholder="mm/dd/yyyy" oninput="this.className = ''"></p>
-                  <p>What meal plan would you like?</p>
-                  <p><select name="meal plan">
-                    <option id="rp" value="Red plan">red plan</option>
-                    <option id="bp" value="Blue plan">blue plan</option>
-                    <option id="gp" value="Gold plan">gold plan</option>
+                  <p>Is this your first semester?</p>
+                  <p><select id="firstSem" name="firstSemester">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
                   </select></p>
                 </div>
-                <p>If you live on-campus, what housing option do you have?</p>
-                  <p><select id="housing" name="housing options">
-                    <option id="rp" value="not">no</option>
-                  </select></p>
-                </div>   
-                
-                <div class="tab">How many in-person classes are you taking?
+                  
+                <!--Second tab-->
+                <div class="tab"><p>How many in-person classes are you taking?</p>
                   <p><select name="In-Person Classes">
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -118,13 +103,13 @@
                     <option value="7">7</option>
                   </select></p>
                   <p>Are you an Indiana Resident?</p>
-                  <p><select name="Indiana Resident">
-                    <option value="yes-resident">no</option>
-                    <option value="no-resident">no</option>
+                  <p><select id="InRes" name="Indiana Resident">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
                   </select></p>
                 </div>
-
-                <div class="tab">How many 100 Level Credit Hours will you be taking?
+                <!--third tab-->
+                <div class="tab"><p>How many 100 Level Credit Hours will you be taking?</p>
                   <p><select name="Number of 100-Level Credit Hours">
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -241,6 +226,22 @@
                     <option value="24">24</option>
                   </select></p>
                 </div>
+                <!--fourth tab-->
+                <div class="tab">
+                  <p>Please choose a meal plan.</p>
+                  <p><select id="meal" name="mealPlan">
+                    <option value="0" selected>Select a meal plan</option>
+                  </select></p>
+                  <p>Please choose a housing situation.</p>
+                  <p><select id="house" name="housing">
+                    <option value="0" selected>Select a housing option</option>
+                  </select></p>
+                  <p>Do you have Archie's Book Bundle?</p>
+                  <p><select id="archiesBundle" name="archiesBB">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select></p>
+                </div> 
 
 
                 
@@ -251,9 +252,8 @@
                   </div>
                 </div>
                 
-                <!-- Circles which indicates the steps of the form: -->
+                <!-- Circles which indicates the steps of the form:-->
                 <div style="text-align:center;margin-top:40px;">
-                  <span class="step"></span>
                   <span class="step"></span>
                   <span class="step"></span>
                   <span class="step"></span>
@@ -263,19 +263,13 @@
                 </form>
             </div>
     </div>
-        <!--Buttons for Different Functions
-        <div class="button-control">
-        <input type="button" onclick="calculate()" value="Calculate"></input>
-        <input type="button" value="Reset Data" onclick="resetData()"></input>
-        <input type="button" value="Add Row" onclick="addRow()"></input>
-        <input type="button" value="Remove Row" onclick="removeRow()"></input>
-        </div>-->
     </form>
     </fieldset>
-    <script src="SFSCCheckin.js"></script>
-    <script src="parser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <script src="parser.js"></script>
+    <script src="SFSCCheckin.js"></script>
+    <!--<script src="calculations.js"></script>-->
     </div>
 </body>
 

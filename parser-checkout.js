@@ -1,11 +1,13 @@
 //creating empty arrays to store each dictionary
-let majorDictionary = {};
-let housingDictionary = {};
-let mealDictionary = {};
+var majorDictionary = {};
+var housingDictionary = {};
+var mealDictionary = {};
 
 var ExcelToJSON = function() {
    //parsing XLSX
    this.parseExcel = function() {
+      //var file = "https://docs.google.com/spreadsheets/d/1t3FhAAjjBY2oWEM-BQEzv2NOI1bRTFhF/edit?usp=share_link&ouid=114960173196862652140&rtpof=true&sd=true";
+      //var file = "https://www.dropbox.com/s/9sucpak0nmlaz2e/Fees.xlsx?dl=1";
       var file = "https://usi-outreach-tsisc-safety-badge-system.s3.amazonaws.com/Public/SFSC/Fees.xlsx";
       //var file = "./Fees.xlsx";
       var xhr = new XMLHttpRequest();
@@ -21,12 +23,7 @@ var ExcelToJSON = function() {
       // Here is your object
       var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
          if (sheetName == 'majorFees') {
-            
-            //mapping list of majors & adding to dropdown selection
-            var selectElement = document.getElementById('mjr');
-            var majors = XL_row_object.map(t=>t.Majors)
-            majors.forEach(item=> selectElement.appendChild(new Option(item)));
-
+   
             //populating dictionaries based on column key
             var column = 'Majors';
             for (var i = 0; i < XL_row_object.length; i++) {
@@ -41,11 +38,6 @@ var ExcelToJSON = function() {
       var column = 'Housing';
       var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
 
-      //mapping list of housings options & adding to dropdown selection
-      var selectElement = document.getElementById('house');
-      XL_row_object.map(t=>t.Housing)
-         .forEach(item=>selectElement.appendChild(new Option(item)));
-
       //populating dictionary
       for (var i = 0; i < XL_row_object.length; i++) {
          var value = XL_row_object[i][column];
@@ -58,11 +50,6 @@ var ExcelToJSON = function() {
    } else if (sheetName == 'mealPlans') {
       var column = 'MealPlan';
       var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-
-      //mapping list of meal plans & adding to dropdown selection
-      var selectElement = document.getElementById('meal');
-      XL_row_object.map(t=>t.MealPlan)
-         .forEach(item => selectElement.appendChild(new Option(item)));
 
       //populating dictionary
       for (var i = 0; i < XL_row_object.length; i++) {
@@ -79,10 +66,3 @@ var ExcelToJSON = function() {
    xhr.send();
 };
 };
-
-const excelToJSON = new ExcelToJSON();
-excelToJSON.parseExcel();
-
-console.log(majorDictionary);
-
-console.log(majorDictionary);

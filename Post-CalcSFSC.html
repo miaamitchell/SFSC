@@ -1,0 +1,88 @@
+<!--Garrett DiDomizio, Mia Mitchell, Yifei Jiao, Ryan Pritchett Contact: gdidomizio@eagles.usi.edu Last Updated: 3/23/2023-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="SFSCCheckin.css">
+</head>
+
+<body>
+    <fieldset>
+    <!--Start of Form-->
+    <div class="container">
+        <form id="regForm" action="javascript:void(0);">
+          <h4>Below are your total costs per fee as well as your estimated overall total </h4>
+            <h1>Calculation Estimates:</h1>
+            <!--Where calculation totals will be displayed-->
+            <h3 class="fees" id="chCost">Cost for Desired Credit Hours.......................................................................</h3>
+            <h3 class="fees" id="usFee">University Service Fee....................................................................................</h3>
+            <h3 class="fees" id="tpFee">Transportation/ Parking Fee.........................................................................</h3>
+            <h3 class="fees" id="saFee">Student Activity Fee.......................................................................................</h3>
+            <h3 class="fees" id="abBundle">Archie's Book Bundle.....................................................................................</h3>
+            <h3 class="fees" id="hCosts">Housing Costs..................................................................................................</h3>
+            <h3 class="fees" id="dPlan">Deaconess Plan................................................................................................</h3>
+            <h3 class="fees" id="mPlan">Meal Plan.........................................................................................................</h3>
+            <h2 class="fees" id="preTotal">Total.......................................................................................</h2>
+            
+           <!-- <div class="recalctuit"><button type="button" class="btn-primary" onclick="backtoCheckin()">Calculate Tuition Again</button></div>
+            <div class="print"><button type="button" class="btn-primary" onClick="window.print()">Print this page</button></div>-->
+
+            <div id="outer">
+              <div class="inner"><button type="submit" class="btn-primary" onClick="backtoCheckin()" >Calculate Tuition Again</button></div>
+              <div class="inner"><button type="submit" class="btn-primary" onClick="window.print()">Print Estimate</button></div>
+              <div class="inner"><button type="submit" class="btn-primary" onclick="showForm()" value="Contact Us">Contact Us</div>
+              <!--<div class="inner"><button class="msgBtnBack">Back</button></div>-->
+            </div>
+            <br>
+            <br>
+            
+            </form>
+            <form action="mailto:financial.success@usi.edu" id="emailForm" method="get" enctype="text/plain">
+              Subject:<br>
+              <!-- <input type="hidden" name="subject" value="Pre Semester Checkin Calculator"> -->
+              <input type="text" id="emailInfo" name="subject" placeholder="Your Name"><br>
+              Email:<br>
+              <input type="text" id="emailInfo" name="email" placeholder="Your Email"><br>
+              Message:<br>
+              <textarea id="emailInfo" name="body" rows="5" cols="30" placeholder="Please provide your USI student ID if applicable and any questions for the Student Financial Success Center"></textarea><br><br>
+              <input type="submit" id="email" value="Send" onclick="hideForm()"><input type="button" id="email" onclick="hideForm()" value="Close">
+              
+            </form>
+        
+
+    </div>
+    </fieldset>
+    <script>
+      function backtoCheckin(){
+      location.replace("SFSCCheckin.html");
+    }
+
+    var estimatedAid = sessionStorage.getItem("estimatedAid");
+    var mjrSelect = sessionStorage.getItem("mjrSelect");
+    var credithours = sessionStorage.getItem("creditHours");
+    var firstSemester = sessionStorage.getItem("firstSemester");
+    var inPersonClasses = sessionStorage.getItem("inPersonClasses");
+    var onlineClasses = sessionStorage.getItem("onlineClasses");
+    var hybridClasses = sessionStorage.getItem("hybridClasses");
+    var InRes = sessionStorage.getItem("InRes");
+    var oneHundred = sessionStorage.getItem("oneHundred");
+    var twoHundred = sessionStorage.getItem("twoHundred");
+    var threeHundred = sessionStorage.getItem("threeHundred");
+    var fourHundred = sessionStorage.getItem("fourHundred");
+    var mealPlan = sessionStorage.getItem("mealPlan");
+    var housingPlan = sessionStorage.getItem("housingPlan");
+    var archiesBundle = sessionStorage.getItem("archiesBundle");
+
+    </script>
+    <!-- <script src="SFSCCheckin.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <script src="parser-checkout.js"></script>
+    <script src="calculations.js"></script>
+    </div>
+</body>
+
+</html>

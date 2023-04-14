@@ -1,3 +1,4 @@
+/*Garrett DiDomizio, Mia Mitchell, Yifei Jiao, Ryan Pritchett Contact: gdidomizio@eagles.usi.edu Last Updated: 3/23/2023*/
 /* Style the form */
 #regForm {
   background-color: #ffffff;
@@ -48,17 +49,82 @@ input.invalid {
   background-color: #68e5b7;
 }
 /*Font */
-h1, h4 {
+h1, h3, h4, h2, p {
     font-family: Outfit,sans-serif;
+    text-align: center;
 }
 h1{
     color: rgb(0 40 86);
+    
 }
 .btn-primary {
   background-color: #002856;
   color: #ffffff;
   border-color: #2e6da4;
+  text-align: center;
+  margin:auto;
 }
-.loginButton {
+.nameinput{
+  max-width: 200px;
+  text-align: center;
+  margin:auto;
+}
+/*.loginButton {
   height: 54px;
+}*/
+.recalctuit {
+  text-align: left;
+  margin:auto;
+}
+.print {
+  text-align: center;
+  margin:auto;
+}
+
+#outer
+{
+    width:100%;
+    text-align: center;
+}
+.inner
+{
+    display: inline-block;
+}
+.fees
+{
+  text-align: center;
+}
+#emailForm
+{
+  background-color: rgb(0, 40, 86);
+  color: white;
+  font-family: Outfit,sans-serif;
+  font-size: 20px;
+  border: 2px black;
+  border-radius: 30px;
+  padding: 20px;
+  width: 450px;
+  height: 325px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  display: none;
+}
+#email
+{
+  width: 40%;
+  margin-left: 13px;
+  margin-right: 13px;
+  font-family: Outfit,sans-serif;
+}
+#email:hover
+{
+  background-color: aliceblue;
+}
+
+#emailInfo
+{
+  width: 90%;
+  margin-bottom: 10px;
 }
