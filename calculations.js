@@ -2,12 +2,9 @@ function addNumbers(...nums) {
    return nums.reduce((total, num) => total + Number(num), 0);
 }
 
-
 function sleep(milliseconds) {  
   return new Promise(resolve => setTimeout(resolve, milliseconds));  
 }  
-
-
 
 async function performcalc() 
 {      
@@ -22,7 +19,6 @@ async function performcalc()
       
       console.log(major);
       console.log(majorData);
- 
 
       var estimatedAid = sessionStorage.getItem("estimatedAid");
       var creditHours = sessionStorage.getItem("creditHours");
@@ -37,9 +33,10 @@ async function performcalc()
       var mealPlan = sessionStorage.getItem("mealPlan");
       var housingPlan = sessionStorage.getItem("housingPlan");
       var archieBundle = sessionStorage.getItem("archiesBundle");
-      
+      console.log(archieBundle);
+      console.log(inState);
    //Cost for desired credit hours
-   if (inState) {
+   if (inState == "Yes") {
       costPerCreditHr = (majorData[0]['CostPerCreditHourIN']) * creditHours;
    } else {
       costPerCreditHr = (majorData[0]['CostPerCreditHourOut']) * creditHours;
@@ -118,8 +115,8 @@ async function performcalc()
    }
 
    //Archie's Book Bundle
-   if(archieBundle) {
-      archieFee = majorData[0]['ArchiesBookBundle'];
+   if(archieBundle == "Yes") {
+      archieFee = (majorData[0]['ArchiesBookBundle'])*creditHours;
    } else {
       archieFee = 0;
    }
@@ -137,7 +134,6 @@ async function performcalc()
    //Total Semester Cost for Major
    majorCost = addNumbers(costPerCreditHr,univServiceFee,programFee,studentActivityFee,counselingFee,transportationFee,assessmentFee,enrollmentFee,matriculationFee,onlineFee,hybridFee,housingActivityFee,deaconessPlan,archieFee,athleticsFee);
 
-   console.log(housingPlan);
    var housingData = housingDictionary[housingPlan];
 
    housingCost = housingData[0]['Cost'];
@@ -149,23 +145,44 @@ async function performcalc()
    totalCost = addNumbers(majorCost,housingCost,mealPlanCost);
    grandTotal = totalCost - estimatedAid;
 
-   window.sessionStorage.setItem('totalCost',totalCost);
+   //window.sessionStorage.setItem('totalCost',totalCost);
 
-   document.getElementById("preTotal").innerHTML = "Total Cost: $"+totalCost.toFixed(2);
-   document.getElementById("chCost").innerHTML = "Cost for Desired Credit Hours: $"+costPerCreditHr;
-   document.getElementById("usFee").innerHTML = "University Service Fee: $"+univServiceFee;
-   document.getElementById("tpFee").innerHTML = "Transportation/Parking Fee: $"+transportationFee;
-   document.getElementById("saFee").innerHTML = "Student Activity Fee: $"+studentActivityFee;
-   document.getElementById("abBundle").innerHTML = "Archie's Book Bundle: $"+archieFee;
-   document.getElementById("hCosts").innerHTML = "Housing Cost: $"+housingCost;
-   document.getElementById("dPlan").innerHTML = "Deaconess Plan: $"+deaconessPlan;
-   document.getElementById("mPlan").innerHTML = "Meal Plan: $"+mealPlanCost;
+
+   document.getElementById("credithrcostid").innerHTML = "Cost for Desired Credit Hours: $"+dollarValue(majorCost).toFixed(2);
+   document.getElementById("univserviceid").innerHTML = "University Service Fee: $"+dollarValue(univServiceFee).toFixed(2);
+   document.getElementById("transportationid").innerHTML = "Transportation/Parking Fee: $"+dollarValue(transportationFee).toFixed(2);
+   document.getElementById("studentactivityid").innerHTML = "Student Activity Fee: $"+dollarValue(studentActivityFee).toFixed(2);
+   document.getElementById("archiebundleid").innerHTML = "Archie's Book Bundle: $"+dollarValue(archieFee).toFixed(2);
+   document.getElementById("housingplanid").innerHTML = "Housing Costs: $"+dollarValue(housingCost).toFixed(2);
+   document.getElementById("deaconessid").innerHTML = "Deaconess Plan: $"+dollarValue(deaconessPlan).toFixed(2);
+   document.getElementById("mealplanid").innerHTML = "Meal Plan: $"+dollarValue(mealPlanCost).toFixed(2);
+   document.getElementById("totalcostid").innerHTML = "Total Cost: $"+ dollarValue(totalCost).toFixed(2);
+   document.getElementById("aidid").innerHTML = "Estimated Financial Aid: $"+dollarValue(estimatedAid).toFixed(2);
+   var totalOutput = document.getElementById("grandtotalid")
+   var descriptor;
+
+   //changing grand total to refund(green) or cost(red)
+   if (grandTotal >= 0) {
+      totalOutput.style.color = "red";
+      descriptor = "Estimated Cost";
+   }
+   else {
+      totalOutput.style.color = "green";
+      descriptor = "Estimated Refund";
+   }
+   totalOutput.innerHTML = descriptor +": $"+dollarValue(Math.abs(grandTotal)).toFixed(2);
+}  
+
+//converting string values to numbers and adding fixed decimal
+function dollarValue(value) {
+   if (typeof value === 'string') {
+      return parseFloat(value);
+   }
+   if (typeof value === 'number') {
+      return value;
+   }
 }
 
-function hideForm() {
-   document.getElementById("emailForm").style.display = "none";
-}
-function showForm() {
-   document.getElementById("emailForm").style.display = "block";
-}
+
+
 performcalc();

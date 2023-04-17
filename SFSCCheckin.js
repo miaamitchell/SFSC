@@ -13,8 +13,8 @@ showTab(currentTab); // Display the current tab
 function showTab(n) {
   // This function will display the specified tab of the form ...
   var x = document.getElementsByClassName("tab");
-  console.log(x);
-  console.log(n);
+  //console.log(x);
+  //console.log(n);
   x[n].style.display = "block";
   // ... and fix the Previous/Next buttons:
   if (n == 0) {
@@ -78,6 +78,7 @@ function validateForm(){
   // Check if each select element has a valid value
   for (i = 0; i < selects.length; i++) {
     if (selects[i].value == "") { // if the selected value is empty...
+      alert("All options must be selected before advancing");
       selects[i].className += " invalid"; // add an "invalid" class to the select element
       valid = false; // and set the current valid status to false
     }
@@ -163,7 +164,6 @@ function sessionSave(){
   // Store the selected value in sessionStorage
   sessionStorage.setItem("estimatedAid", estaid);
   sessionStorage.setItem("mjrSelect", selectedmajor.text);
-  console.log(selectedmajor);
   sessionStorage.setItem("creditHours", selectedCreditHours);
   sessionStorage.setItem("firstSemester", selectedfirstSemester.text);
   sessionStorage.setItem("inPersonClasses", selectedinPersonClasses);
@@ -177,6 +177,7 @@ function sessionSave(){
   sessionStorage.setItem("mealPlan", selectedmealPlan.text);
   sessionStorage.setItem("housingPlan", selectedhousingPlan.text);
   sessionStorage.setItem("archiesBundle", selectedarchiesPlan.text);
+  console.log(archiesBundle);
   
   // Use the stored value in your JavaScript code
   //console.log("Number of credit hours selected: " + selectedCreditHours);
