@@ -13,8 +13,8 @@ showTab(currentTab); // Display the current tab
 function showTab(n) {
   // This function will display the specified tab of the form ...
   var x = document.getElementsByClassName("tab");
-  console.log(x);
-  console.log(n);
+  //console.log(x);
+  //console.log(n);
   x[n].style.display = "block";
   // ... and fix the Previous/Next buttons:
   if (n == 0) {
@@ -24,9 +24,7 @@ function showTab(n) {
     document.getElementById("prevBtn").style.display = "inline";
   }
   if (n == (x.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Submit"
-    
-    ; 
+    document.getElementById("nextBtn").innerHTML = "Submit"; 
   } else {
     document.getElementById("nextBtn").innerHTML = "Next";
   }
@@ -35,16 +33,21 @@ function showTab(n) {
 }
 
 function nextPrev(n) {
+  console.log(n);
+  if(parseInt(n) == 1){
+    console.log("Advanced tab; need to validate it")
+    validateForm(currentTab);
+  }
+
   // This function will figure out which tab to display
   var x = document.getElementsByClassName("tab");
-  // Exit the function if any field in the current tab is invalid:
-  if (n == 1 && !validateForm()) return false;
+
   // Hide the current tab:
   x[currentTab].style.display = "none";
   // if you have reached the end of the form... :
-  if (currentTab == x.length -1) {
+  if (currentTab == x.length -1 & parseInt(n)== 1) {
     // Check that the form inputs are valid
-    if(validateForm())
+    if(validateForm(currentTab))
     {
       sessionSave();
       //...change the form action to the new page URL:
@@ -60,7 +63,22 @@ function nextPrev(n) {
   showTab(currentTab);
 }
 
-function validateForm(){
+function validateForm(tab_to_validate){
+  console.log("Validating tab "+tab_to_validate);
+  if(tab_to_validate == 2)
+  {
+    if(validatecreditHours()){nextPrev(0);}
+  }
+  if(tab_to_validate == 1)
+    {
+      validateclassType();
+    }
+    if(tab_to_validate == 0)
+    {
+      var nextpage = validatemajorSelected();
+      if(nextpage == false){nextPrev(0);}
+    }
+
   // This function deals with validation of the form fields
   var x, y, i, valid = true;
   x = document.getElementsByClassName("tab");
@@ -80,6 +98,7 @@ function validateForm(){
   // Check if each select element has a valid value
   for (i = 0; i < selects.length; i++) {
     if (selects[i].value == "") { // if the selected value is empty...
+      alert("All options must be selected before advancing");
       selects[i].className += " invalid"; // add an "invalid" class to the select element
       valid = false; // and set the current valid status to false
     }
@@ -91,6 +110,7 @@ function validateForm(){
   }
   return valid; // return the valid status
 }
+
 
 //More validation
 // Get references to the select menus
@@ -110,18 +130,18 @@ document.getElementById("regForm").addEventListener("submit", function(event) {
   const creditHours = parseInt(creditHoursSelect.value);
   const inPersonClasses = parseInt(inPersonClassesSelect.value);
   const onlineClasses = parseInt(onlineClassesSelect.value);
-  const selectedfirstsemres = true;
+  const firstSemester = true;
   const hybridClasses = parseInt(hybridClassesSelect.value);
   const estimatedAid = parseInt(estimatedAidSelect.value);
   const mjrSelect = true;
-  const selectedInRes= true; 
-  const selectedoneHundred = parseInt(selectedoneHundredSelect.value);
-  const selectedtwoHundred = parseInt(selectedtwoHundredSelect.value);
-  const selectedthreeHundred = parseInt(selectedthreeHundred.value);
-  const selectedfourHundred = parseInt(selectedfourHundred.value);
-  const selectedmp = true;
-  const selectedHousing =true;
-  const selectedarchiesBundle = true;
+  const InRes = true; 
+  const oneHundred = parseInt(selectedoneHundredSelect.value);
+  const twoHundred = parseInt(selectedtwoHundredSelect.value);
+  const threeHundred = parseInt(selectedthreeHundred.value);
+  const fourHundred = parseInt(selectedfourHundred.value);
+  const mealPlan = true;
+  const housingPlan = true;
+  const archiesBundle = true;
 
   // Check that credit hours are greater than 0
   if (inPersonClasses+onlineClasses+hybridClasses == 0) {
@@ -146,40 +166,84 @@ function fixStepIndicator(n) {
 
 function sessionSave(){
 // Get the selected value from the "Number of Credit Hours" dropdown
-var estaid = document.getElementsByName("aidinputted")[0].value;
-var selectedmajor = document.getElementById("mjr").options[document.getElementById("mjr").selectedIndex];
-var selectedCreditHours = document.getElementsByName("Number of Credit Hours")[0].value;
-var selectedfirstSemester = document.getElementById("firstSem").options[document.getElementById("firstSem").selectedIndex];
+  var estaid = document.getElementsByName("aidinputted")[0].value;
+  var selectedmajor = document.getElementById("mjr").options[document.getElementById("mjr").selectedIndex];
+  var selectedCreditHours = document.getElementsByName("Number of Credit Hours")[0].value;
+  var selectedfirstSemester = document.getElementById("firstSem").options[document.getElementById("firstSem").selectedIndex];
+  var selectedinPersonClasses = document.getElementsByName("In-Person Classes")[0].value;
+  var selectedonlineClasses = document.getElementsByName("Online Classes")[0].value;
+  var selectedhybridClasses = document.getElementsByName("Hybrid Classes")[0].value;
+  var selectedindianaResident = document.getElementById("InRes").options[document.getElementById("InRes").selectedIndex];
+  var selectedhundredLevel = document.getElementsByName("Number of 100-Level Credit Hours")[0].value;
+  var selectedtwohundredLevel = document.getElementsByName("Number of 200-Level Credit Hours")[0].value;
+  var selectedthreehundredLevel = document.getElementsByName("Number of 300-Level Credit Hours")[0].value;
+  var selectedfourhundredLevel = document.getElementsByName("Number of 400-Level Credit Hours")[0].value;
+  var selectedmealPlan = document.getElementById("meal").options[document.getElementById("meal").selectedIndex];
+  var selectedhousingPlan = document.getElementById("house").options[document.getElementById("house").selectedIndex];
+  var selectedarchiesPlan = document.getElementById("archiesBundle").options[document.getElementById("archiesBundle").selectedIndex];
+  
+  // Store the selected value in sessionStorage
+  sessionStorage.setItem("estimatedAid", estaid);
+  sessionStorage.setItem("mjrSelect", selectedmajor.text);
+  sessionStorage.setItem("creditHours", selectedCreditHours);
+  sessionStorage.setItem("firstSemester", selectedfirstSemester.text);
+  sessionStorage.setItem("inPersonClasses", selectedinPersonClasses);
+  sessionStorage.setItem("onlineClasses", selectedonlineClasses);
+  sessionStorage.setItem("hybridClasses", selectedhybridClasses);
+  sessionStorage.setItem("InRes", selectedindianaResident.text);
+  sessionStorage.setItem("oneHundred", selectedhundredLevel);
+  sessionStorage.setItem("twoHundred", selectedtwohundredLevel);
+  sessionStorage.setItem("threeHundred", selectedthreehundredLevel);
+  sessionStorage.setItem("fourHundred", selectedfourhundredLevel);
+  sessionStorage.setItem("mealPlan", selectedmealPlan.text);
+  sessionStorage.setItem("housingPlan", selectedhousingPlan.text);
+  sessionStorage.setItem("archiesBundle", selectedarchiesPlan.text);
+  console.log(archiesBundle);
+  
+  // Use the stored value in your JavaScript code
+  //console.log("Number of credit hours selected: " + selectedCreditHours);
+  //console.log("The number of in person credit hours is: " + selectedinPersonClasses);
+  }
+  function validatecreditHours()
+  {
+      console.log("enough credit hours")
+      var selectedhundredLevel = document.getElementsByName("Number of 100-Level Credit Hours")[0].value;
+      var selectedtwohundredLevel = document.getElementsByName("Number of 200-Level Credit Hours")[0].value;
+      var selectedthreehundredLevel = document.getElementsByName("Number of 300-Level Credit Hours")[0].value;
+      var selectedfourhundredLevel = document.getElementsByName("Number of 400-Level Credit Hours")[0].value;
+      var selectedCreditHours = document.getElementsByName("Number of Credit Hours")[0].value;
+    // Example credit hours
+  const levelCredits = parseInt(selectedhundredLevel) + parseInt(selectedtwohundredLevel) + parseInt(selectedthreehundredLevel) + parseInt(selectedfourhundredLevel);
+  console.log("Credit Hours w/level identified = "+levelCredits)
+  console.log("Selected Hours = "+selectedCreditHours)
+  // Validate credit hours for each level
+  if (levelCredits > parseInt(selectedCreditHours)) {
+      alert("Credit hours for all levels exceed total credit hours selected.");
+    }
+  console.log('Credit hours are valid.'); // If all credit hours are valid
+  }
+
+
+function validateclassType()
+{
 var selectedinPersonClasses = document.getElementsByName("In-Person Classes")[0].value;
 var selectedonlineClasses = document.getElementsByName("Online Classes")[0].value;
 var selectedhybridClasses = document.getElementsByName("Hybrid Classes")[0].value;
-var selectedindianaResident = document.getElementById("InRes").options[document.getElementById("InRes").selectedIndex];
-var selectedhundredLevel = document.getElementsByName("Number of 100-Level Credit Hours")[0].value;
-var selectedtwohundredLevel = document.getElementsByName("Number of 200-Level Credit Hours")[0].value;
-var selectedthreehundredLevel = document.getElementsByName("Number of 300-Level Credit Hours")[0].value;
-var selectedfourhundredLevel = document.getElementsByName("Number of 400-Level Credit Hours")[0].value;
-var selectedmealPlan = document.getElementById("mealPlan").options[document.getElementById("mealPlan").selectedIndex];
-var selectedhousingPlan = document.getElementById("housing").options[document.getElementById("housing").selectedIndex];
-var selectedarchiesPlan = document.getElementById("archiesBB").options[document.getElementById("archiesBB").selectedIndex];
+const classesTaken = parseInt(selectedinPersonClasses) + parseInt(selectedhybridClasses) + parseInt(selectedonlineClasses);
+console.log("Amount of classes of any type equals" + classesTaken)
+if (classesTaken < 1){
+  alert("No amount of classes were selected for any class type (hybrid, in person, or online)"); //validate that at least one clss type is selected.
+}
+console.log('Amount of classes was valid, as it was greater than 1'); //if classes taken is greater than 1
+}
 
-// Store the selected value in sessionStorage
-sessionStorage.setItem("estimatedAid", estaid);
-sessionStorage.setItem("mjrSelect", selectedmajor.text);
-sessionStorage.setItem("creditHours", selectedCreditHours);
-sessionStorage.setItem("selectedfirstsemres", selectedfirstSemester.text);
-sessionStorage.setItem("inPersonClasses", selectedinPersonClasses);
-sessionStorage.setItem("onlineClasses", selectedonlineClasses);
-sessionStorage.setItem("hybridClasses", selectedhybridClasses);
-sessionStorage.setItem("selectedInRes", selectedindianaResident.text);
-sessionStorage.setItem("selectedoneHundred", selectedhundredLevel);
-sessionStorage.setItem("selectedtwoHundred", selectedtwohundredLevel);
-sessionStorage.setItem("selectedthreeHundred", selectedthreehundredLevel);
-sessionStorage.setItem("selectedfourHundred", selectedfourhundredLevel);
-sessionStorage.setItem("selectedmp", selectedmealPlan.text);
-sessionStorage.setItem("selectedHousing", selectedhousingPlan.text);
-sessionStorage.setItem("selectedarchiesBundle", selectedarchiesPlan.text);
-
-// Use the stored value in your JavaScript code
-//console.log("Number of credit hours selected: " + selectedCreditHours);
-//console.log("The number of in person credit hours is: " + selectedinPersonClasses);
+function validatemajorSelected()
+{
+  var selectedmajor = document.getElementById("mjr").options[document.getElementById("mjr").selectedIndex];
+  if (selectedmajor.value == 1){
+  alert("No major was selected, please select a major"); //validates that a major was selected
+  return false;
+  }
+  console.log('major was selected'); //if major was selected this appears
+  return true;
 }
