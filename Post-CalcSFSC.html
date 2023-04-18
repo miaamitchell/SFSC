@@ -1,0 +1,135 @@
+<!--Garrett DiDomizio, Mia Mitchell, Yifei Jiao, Ryan Pritchett Contact: gdidomizio@eagles.usi.edu Last Updated: 3/23/2023-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="SFSCCheckin.css">
+</head>
+
+<body>
+    <fieldset>
+    <!--Start of Form-->
+    <div class="container">
+        <div class="content">
+        <form id="regForm" action="javascript:void(0);">
+          <h4>Below are the results of your calculation. This includes estimated fee costs and totals.</h4>
+          
+          <div class="infobox">
+
+            <details>
+            <summary id="credithrcostid"></summary><p><b></b>Cost for Desired Credit Hours Information</p>
+            <p>
+          Mandatory student fees assessed to students enrolled in credit courses for costs associated with instruction and related services. Student class level and residency is based upon classification by Registrar's Office. 
+          <br><br>
+          </p>
+          </details>
+          <br>
+          <details>
+            <summary id="univserviceid"></summary><p>University Service Fee Information</p>
+            Mandatory fee assessed to all student to support services available to all students.
+          <br>
+          </details>
+          <br>
+          <details>
+            <summary  id="transportationid" ></summary><p>Transportation Parking Fee Information</p>
+            <p>All USI students enrolled in on-campus courses are assessed a Transportation/Parking Fee that funds the upkeep of campus roadways, parking lots, pedestrian sidewalks and paths, and the on-campus shuttle bus service.
+              For more info visit:<br>
+              <a href="url">https://www.usi.edu/public-safety/parking/fines-and-fees</a><br>
+            </p>
+          </details>
+          <br>
+          <details>
+            <summary id="studentactivityid"></summary><p>Student Activity Fee Information</p>
+            <p>All USI students enrolled in on-campus courses are assessed the Student Activity. This fee supports various campus resources and activities such as USI Theater, Spring Fest, Student Government Association, Eagle Perks, Intramural Sports, Recreation, Fitness, and Wellness Center, The Shield, Student Organizations, and other various student oriented activities.</p>
+          </details>
+          <br>
+          <details>
+            <summary id="archiebundleid"></summary><p>Archie's Book Bundle Information</p>
+            <p>Assessed to undergraduate students, this fee is for the University's textbook rental program. To learn more about this program and how it can save you money and time, please visit the Archie's Book Bundle FAQ Page.
+              <br><br><br><a href="url">https://www.usi.edu/campus-store/archies-book-bundle</a><br> 
+            </p>
+          </details>
+          <br>
+          <details>
+            <summary id="housingplanid"></summary><p>Housing Costs Information</p>
+            <p>
+          Cost of chosen on-campus housing option. For more info visit:
+              <br><br><a href="url">https://www.usi.edu/housing/housing-options/housing-rates</a><br>
+          </details>
+          <br>
+          <details>
+            <summary id="deaconessid"></summary><p>Deaconess Plan Information</p>
+            <p>To meet the needs of students both with and without private health insurance, the Deaconess Clinic has developed an office visit plan (OVP) for a fee per semester. The OVP covers all office visits incurred during a semester. The plan was developed for the convenience of our students who need easy access to a medical provider between classes, or while away from home. It eliminates any co-payment that may be necessary with other insurance providers and provides discounted fees on certain procedures. Students living in on-campus housing will be assessed this fee as a requirement of on-campus housing.</p>
+          </details>
+          <br>
+          <details>
+            <summary id="mealplanid"></summary><p>Meal Plan Information</p>
+            <p>
+              Cost of chosen meal plan. For more info visit:
+              <br><br><a href="url">https://usi.sodexomyway.com/my-meal-plan</a><br> 
+          </details>
+          
+          
+          <p id="totalcostid"></p>
+          
+          <p id="aidid"></p>
+          
+          <hr>
+          <div class="tooltip"><p id="grandtotalid"></p>
+            <span class="tooltiptext">Red means you would owe, <br> Green means you wouldn't</span>
+          </div>
+
+          </div>
+
+
+            <h6><i>*Please note that these are estimates and actual billing costs may vary.</i></h6>
+           <!-- <div class="recalctuit"><button type="button" class="btn-primary" onclick="backtoCheckin()">Calculate Tuition Again</button></div>
+            <div class="print"><button type="button" class="btn-primary" onClick="window.print()">Print this page</button></div>-->
+
+            <div id="outer">
+              <div class="inner"><button type="submit" class="btn-primary" onClick="backtoCheckin()" >Calculate Tuition Again</button></div>
+              <div class="inner"><button type="submit" class="btn-primary" onClick="window.print()">Print Estimate</button></div>
+              <!--<div class="inner"><button class="msgBtnBack">Back</button></div>-->
+            </div>
+            <br>
+            <br>
+            
+            </form>
+            </div>
+    </div>
+    </form>
+    </fieldset>
+    <script>
+      function backtoCheckin(){
+      location.replace("SFSCCheckin.html");
+    }
+
+    var estimatedAid = sessionStorage.getItem("estimatedAid");
+    var mjrSelect = sessionStorage.getItem("mjrSelect");
+    var credithours = sessionStorage.getItem("creditHours");
+    var firstSemester = sessionStorage.getItem("firstSemester");
+    var inPersonClasses = sessionStorage.getItem("inPersonClasses");
+    var onlineClasses = sessionStorage.getItem("onlineClasses");
+    var hybridClasses = sessionStorage.getItem("hybridClasses");
+    var InRes = sessionStorage.getItem("InRes");
+    var oneHundred = sessionStorage.getItem("oneHundred");
+    var twoHundred = sessionStorage.getItem("twoHundred");
+    var threeHundred = sessionStorage.getItem("threeHundred");
+    var fourHundred = sessionStorage.getItem("fourHundred");
+    var mealPlan = sessionStorage.getItem("mealPlan");
+    var housingPlan = sessionStorage.getItem("housingPlan");
+    var archiesBundle = sessionStorage.getItem("archiesBundle");
+
+    </script>
+    <!-- <script src="SFSCCheckin.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <script src="parser-checkout.js"></script>
+    <script src="calculations.js"></script>
+    </div>
+</body>
+
+</html>
