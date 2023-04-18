@@ -6,6 +6,7 @@ let mealDictionary = {};
 var ExcelToJSON = function() {
    //parsing XLSX
    this.parseExcel = function() {
+      //var file = "https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&id=1t3FhAAjjBY2oWEM-BQEzv2NOI1bRTFhF";
       var file = "https://usi-outreach-tsisc-safety-badge-system.s3.amazonaws.com/Public/SFSC/Fees.xlsx";
       //var file = "./Fees.xlsx";
       var xhr = new XMLHttpRequest();
@@ -82,7 +83,3 @@ var ExcelToJSON = function() {
 
 const excelToJSON = new ExcelToJSON();
 excelToJSON.parseExcel();
-
-console.log(majorDictionary);
-
-console.log(majorDictionary);

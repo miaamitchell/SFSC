@@ -2,24 +2,28 @@ function addNumbers(...nums) {
    return nums.reduce((total, num) => total + Number(num), 0);
 }
 
+/*
 function sleep(milliseconds) {  
   return new Promise(resolve => setTimeout(resolve, milliseconds));  
-}  
+} 
+*/ 
 
 async function performcalc() 
 {      
+      //var file = "https://usi-outreach-tsisc-safety-badge-system.s3.amazonaws.com/Public/SFSC/Fees.xlsx";
       const excelToJSON = new ExcelToJSON();
-      excelToJSON.parseExcel();
+      const dictionaries = await excelToJSON.parseExcel();
+      
+      const majorDictionary = dictionaries.majorDictionary;
+      const housingDictionary = dictionaries.housingDictionary;
+      const mealDictionary = dictionaries.mealDictionary;
       
       // JM Note: Ideally this isn't a hard sleep and actually waits for the function response.
-      await sleep(100);  
+     // await sleep(100);  
 
       var major = sessionStorage.getItem("mjrSelect");
       var majorData = majorDictionary[major];
       
-      console.log(major);
-      console.log(majorData);
-
       var estimatedAid = sessionStorage.getItem("estimatedAid");
       var creditHours = sessionStorage.getItem("creditHours");
       var inPersonClasses = sessionStorage.getItem("inPersonClasses");
@@ -33,8 +37,7 @@ async function performcalc()
       var mealPlan = sessionStorage.getItem("mealPlan");
       var housingPlan = sessionStorage.getItem("housingPlan");
       var archieBundle = sessionStorage.getItem("archiesBundle");
-      console.log(archieBundle);
-      console.log(inState);
+
    //Cost for desired credit hours
    if (inState == "Yes") {
       costPerCreditHr = (majorData[0]['CostPerCreditHourIN']) * creditHours;
@@ -158,7 +161,7 @@ async function performcalc()
    document.getElementById("mealplanid").innerHTML = "Meal Plan: $"+mealPlanCost;
    document.getElementById("totalcostid").innerHTML = "Total Cost: $"+totalCost;
    document.getElementById("aidid").innerHTML = "Estimated Financial Aid: $"+estimatedAid;
-   document.getElementById("grandtotalid").innerHTML = "Grand Total: $"+grandTotal;
+   document.getElementById("grandtotalid").innerHTML = "Estimated Balance: $"+grandTotal;
 
 }  
 performcalc();
