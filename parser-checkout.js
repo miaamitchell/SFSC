@@ -7,8 +7,7 @@ var ExcelToJSON = function() {
    //parsing XLSX
    this.parseExcel = function() {
       return new Promise((resolve,reject) => {
-         //var file = "https://docs.google.com/spreadsheets/d/1t3FhAAjjBY2oWEM-BQEzv2NOI1bRTFhF/edit?usp=share_link&ouid=114960173196862652140&rtpof=true&sd=true";
-         //var file = "https://www.dropbox.com/s/9sucpak0nmlaz2e/Fees.xlsx?dl=1";
+         //var file = "https://pilotusi-my.sharepoint.com/:x:/r/personal/mmitchell1_eagles_usi_edu/Documents/Fees.xlsx?d=w221a6e8e9a2849e39bfece2de096339e&csf=1&web=1&e=EDcqHE";
          var file = "https://usi-outreach-tsisc-safety-badge-system.s3.amazonaws.com/Public/SFSC/Fees.xlsx";
          //var file = "./Fees.xlsx";
          var xhr = new XMLHttpRequest();
@@ -61,7 +60,8 @@ var ExcelToJSON = function() {
             }
             }
    });
-   resolve({majorDictionary,housingDictionary,mealDictionary});
+   resolve();
+   //resolve({majorDictionary,housingDictionary,mealDictionary});
    };
    xhr.send();
 });

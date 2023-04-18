@@ -2,24 +2,15 @@ function addNumbers(...nums) {
    return nums.reduce((total, num) => total + Number(num), 0);
 }
 
-/*
-function sleep(milliseconds) {  
-  return new Promise(resolve => setTimeout(resolve, milliseconds));  
-} 
-*/ 
-
 async function performcalc() 
 {      
-      //var file = "https://usi-outreach-tsisc-safety-badge-system.s3.amazonaws.com/Public/SFSC/Fees.xlsx";
       const excelToJSON = new ExcelToJSON();
-      const dictionaries = await excelToJSON.parseExcel();
+      await excelToJSON.parseExcel();
+      //const dictionaries = await excelToJSON.parseExcel();
       
-      const majorDictionary = dictionaries.majorDictionary;
-      const housingDictionary = dictionaries.housingDictionary;
-      const mealDictionary = dictionaries.mealDictionary;
-      
-      // JM Note: Ideally this isn't a hard sleep and actually waits for the function response.
-     // await sleep(100);  
+      //const majorDictionary = dictionaries.majorDictionary;
+      //const housingDictionary = dictionaries.housingDictionary;
+      //const mealDictionary = dictionaries.mealDictionary;
 
       var major = sessionStorage.getItem("mjrSelect");
       var majorData = majorDictionary[major];
