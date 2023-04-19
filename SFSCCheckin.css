@@ -55,9 +55,11 @@ h1, h3, h4, h6, h2 {
     text-align: center;
     padding: 5px;
 }
-h1{
+h2{
     color: rgb(0 40 86);
-    
+}
+h1{
+  color: rgb(207 16 45);
 }
 .btn-primary {
   background-color: #002856;
