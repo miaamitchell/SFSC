@@ -6,7 +6,6 @@ let mealDictionary = {};
 var ExcelToJSON = function() {
    //parsing XLSX
    this.parseExcel = function() {
-      //var file = "https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&id=1t3FhAAjjBY2oWEM-BQEzv2NOI1bRTFhF";
       var file = "https://usi-outreach-tsisc-safety-badge-system.s3.amazonaws.com/Public/SFSC/Fees.xlsx";
       //var file = "./Fees.xlsx";
       var xhr = new XMLHttpRequest();
@@ -22,7 +21,6 @@ var ExcelToJSON = function() {
       // Here is your object
       var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
          if (sheetName == 'majorFees') {
-            
             //mapping list of majors & adding to dropdown selection
             var selectElement = document.getElementById('mjr');
             var majors = XL_row_object.map(t=>t.Majors)

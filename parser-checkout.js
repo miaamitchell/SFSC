@@ -2,6 +2,7 @@
 var majorDictionary = {};
 var housingDictionary = {};
 var mealDictionary = {};
+var lastModified = "";
 
 var ExcelToJSON = function() {
    //parsing XLSX
@@ -15,6 +16,8 @@ var ExcelToJSON = function() {
          xhr.responseType = 'arraybuffer';
          xhr.onload = function(e) {
             var data = new Uint8Array(xhr.response);
+            lastModified = xhr.getResponseHeader('Last-Modified');
+            console.log(lastModified);
             var workbook = XLSX.read(data, { type: 'array'});
 
             workbook.SheetNames.forEach(function(sheetName) {
@@ -61,7 +64,6 @@ var ExcelToJSON = function() {
             }
    });
    resolve();
-   //resolve({majorDictionary,housingDictionary,mealDictionary});
    };
    xhr.send();
 });

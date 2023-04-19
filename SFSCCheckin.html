@@ -9,32 +9,26 @@
     <link rel="stylesheet" href="SFSCCheckin.css">
 </head>
 
-<body>
-    <fieldset>
-    <!--Heading and Description-->
-    <h1>Welcome to the SFSC Student Checkin Financial Calculator</h1>
-    <!--<h4>All aid estimates are made from fee data as of:</h4>-->
-    <h4>
-        Please answer the following questions </h4>
-    <h4>
-        *Do not add special characters into the Quantity and Price Fields such as $, <br>
-        leave the fields plain with just numerical values.
-    </h4>
-
-    <!--Start of Form-->
-    <div class="container">
-      <form id="regForm"  onSubmit="JavaScript:sessionSave()">
-
-                <h1>Calculate your Tuition:</h1>
+  <!--Start of Form-->
+  <div class="container">
+    <form id="regForm"  onSubmit="JavaScript:sessionSave()">
+  <!--Heading and Description-->
+  <h1>Welcome to the SFSC Pre-Semester Check-In Tool</h1>
+  <!--<h4>All aid estimates are made from fee data as of:</h4>-->
+      <!--<h4>*Do not add special characters into the Quantity and Price Fields such as $, <br>
+      leave the fields plain with just numerical values.</h4>
+<h4>-->
+  <br>
+              <h2>Answer the following to calculate your tuition:</h2>
                 <!-- One "tab" for each step in the form: -->
-                <div class="tab"><p>What is an estimate of the amount of aid you will receive for this semester?</p>
-                  <div class="nameinput"><input type="number" min="0" max="100000" class="nameinput" placeholder="Estimated Aid Amount" name="aidinputted" oninput="this.className = ''"></div>
-                  <p>What is your major?</p>
-                  <p><select id="mjr">
+                <div class="tab" id="tab1"><h4>What is the estimated aid you will receive this semester?</h4>
+                  <h6><i>*Students can view estimated and past aid in the Financial Aid section within myUSI.</i></h6>
+                  <div id="aid1"><input type="number" min="0" max="100000"value="0" id="estAidof" class="nameinput" placeholder="Estimated Aid" name="aidinputted" ></div>                  <h4>What is your major?</h4>
+                  <h4><select id="mjr">
                     <option value="1" selected>Choose your major</option>
-                  </select></p>
-                  <p>How many credit hours will you be taking?</p>
-                  <p><select name="Number of Credit Hours">
+                  </select></h4>
+                  <h4>How many credit hours will you be taking?</h4>
+                  <h4><select name="Number of Credit Hours">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -60,17 +54,17 @@
                     <option value="22">22</option>
                     <option value="23">23</option>
                     <option value="24">24</option>
-                  </select></p>
-                  <p>Is this your first semester?</p>
-                  <p><select id="firstSem" name="firstSemester">
+                  </select></h4>
+                  <h4>Is this your first semester?</h4>
+                  <h4><select id="firstSem" name="firstSemester">
                     <option value="true">Yes</option>
                     <option value="false">No</option>
-                  </select></p>
+                  </select></h4>
                 </div>
                   
                 <!--Second tab-->
-                <div class="tab"><p>How many in-person classes are you taking?</p>
-                  <p><select name="In-Person Classes">
+                <div class="tab" id="tab2"><h4>How many in-person classes are you taking?</h4>
+                  <h4><select id="IP" name="In-Person Classes">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -79,9 +73,9 @@
                     <option value="5">5</option>
                     <option value="6">6</option>
                     <option value="7">7</option>
-                  </select></p>
-                  <p>How many online classes are you taking??</p>
-                  <p><select name="Online Classes">
+                  </select></h4>
+                  <h4>How many online classes are you taking?</h4>
+                  <h4><select id="ONL" name="Online Classes">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -90,9 +84,9 @@
                     <option value="5">5</option>
                     <option value="6">6</option>
                     <option value="7">7</option>
-                  </select></p>
-                  <p>How many hybrid classes are you taking??</p>
-                  <p><select name="Hybrid Classes">
+                  </select></h4>
+                  <h4>How many hybrid classes are you taking?</h4>
+                  <h4><select id ="HYB" name="Hybrid Classes">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -101,16 +95,19 @@
                     <option value="5">5</option>
                     <option value="6">6</option>
                     <option value="7">7</option>
-                  </select></p>
-                  <p>Are you an Indiana Resident?</p>
-                  <p><select id="InRes" name="Indiana Resident">
+                  </select></h4>
+                  <h4>Are you an Indiana Resident?</h4>
+                  <h4><select id="InRes" name="Indiana Resident">
                     <option value="true">Yes</option>
                     <option value="false">No</option>
-                  </select></p>
+                  </select></h4>
                 </div>
                 <!--third tab-->
-                <div class="tab"><p>How many 100 Level Credit Hours will you be taking within your major?</p>
-                  <p><select name="Number of 100-Level Credit Hours">
+                <div class="tab" id="tab3">
+                <h4><b><i>The following questions cover credit hours within your major. <br><br> For example, if you are a CIS major and take two CIS200 level courses that are each 3 credit hours, then that would equal six 200 level credit hours within your major.</i></b></h4>
+        
+                <h4>How many 100 level credit hours will you be taking within your major?</h4>
+                <h4><select id="hundredL" name="Number of 100-Level Credit Hours">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -137,9 +134,9 @@
                     <option value="22">22</option>
                     <option value="23">23</option>
                     <option value="24">24</option>
-                  </select></p>
-                  <p>How many 200 Level Credit Hours will you be taking within your major?</p>
-                  <p><select name="Number of 200-Level Credit Hours">
+                  </select></h4>
+                  <h4>How many 200 level credit hours will you be taking within your major?</h4>
+                  <h4><select id="twohundredL" name="Number of 200-Level Credit Hours">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -166,9 +163,9 @@
                     <option value="22">22</option>
                     <option value="23">23</option>
                     <option value="24">24</option>
-                  </select></p>
-                  <p>How many 300 Level Credit Hours will you be taking within your major?</p>
-                  <p><select name="Number of 300-Level Credit Hours">
+                  </select></h4>
+                  <h4>How many 300 level credit hours will you be taking within your major?</h4>
+                  <h4><select id="threehundredL" name="Number of 300-Level Credit Hours">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -195,9 +192,9 @@
                     <option value="22">22</option>
                     <option value="23">23</option>
                     <option value="24">24</option>
-                  </select></p>
-                  <p>How many 400 Level Credit Hours will you be taking within your major?</p>
-                  <p><select name="Number of 400-Level Credit Hours">
+                  </select></h4>
+                  <h4>How many 400 level credit hours will you be taking within your major?</h4>
+                  <h4><select id="fourhundredL" name="Number of 400-Level Credit Hours">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -224,27 +221,24 @@
                     <option value="22">22</option>
                     <option value="23">23</option>
                     <option value="24">24</option>
-                  </select></p>
+                  </select></h4>
                 </div>
                 <!--fourth tab-->
-                <div class="tab">
-                  <p>Please choose a meal plan.</p>
-                  <p><select id="meal" name="mealPlan">
-                    <option value="0" selected>Select a meal plan</option>
-                  </select></p>
-                  <p>Please choose a housing situation.</p>
-                  <p><select id="house" name="housing">
-                    <option value="0" selected>Select a housing option</option>
-                  </select></p>
-                  <p>Do you have Archie's Book Bundle?</p>
-                  <p><select id="archiesBundle" name="archiesBB">
+                <div class="tab" id="tab4">
+                  <h4>Please choose a meal plan.</h4>
+                  <h4><select id="meal" name="mealPlan">
+                    <option value="1" selected>Select a meal plan</option>
+                  </select></h4>
+                  <h4>Please choose a housing situation.</h4>
+                  <h4><select id="house" name="housing">
+                    <option value="1" selected>Select a housing option</option>
+                  </select></h4>
+                  <h4>Do you plan to use Archie's Book Bundle?</h4>
+                  <h4><select id="archiesBundle" name="archiesBB">
                     <option value="true">Yes</option>
                     <option value="false">No</option>
-                  </select></p>
+                  </select></h4>
                 </div> 
-
-
-                
                 <div style="overflow:auto;">
                   <div style="float:right;">
                     <button type="button" id="prevBtn" class="btn-primary" onclick="nextPrev(-1)">Previous</button>
@@ -259,17 +253,17 @@
                   <span class="step"></span>
                   <span class="step"></span>
                 </div>
-                
+                <h6><i>*Please note that these are estimates and actual billing costs may vary.</i></h6>
+                <div id="meal-plan-error" class="error"></div>
                 </form>
             </div>
     </div>
     </form>
-    </fieldset>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
     <script src="parser.js"></script>
     <script src="SFSCCheckin.js"></script>
-    <!--<script src="calculations.js"></script>-->
     </div>
 </body>
 

@@ -13,23 +13,73 @@
     <fieldset>
     <!--Start of Form-->
     <div class="container">
+        <div class="content">
         <form id="regForm" action="javascript:void(0);">
-          <h4>Below are your fee costs as well as an estimated grand total. </h4>
-            <h1>Calculation Estimates:</h1>
-            <!--Where calculation totals will be displayed-->
-            <h3 id="credithrcostid">Cost for Desired Credit Hours.......................................................................</h3>
-            <h3 id="univserviceid">University Service Fee....................................................................................</h3>
-            <h3 id="transportationid">Transportation/ Parking Fee.........................................................................</h3>
-            <h3 id="studentactivityid">Student Activity Fee.......................................................................................</h3>
-            <h3 id="archiebundleid">Archie's Book Bundle.....................................................................................</h3>
-            <h3 id="housingplanid">Housing Costs..................................................................................................</h3>
-            <h3 id="deaconessid">Deaconess Plan................................................................................................</h3>
-            <h3 id="mealplanid">Meal Plan.........................................................................................................</h3>
-            <h2 id="totalcostid">Total Cost.......................................................................................</h2>
-            <h2 id="aidid">Estimated Financial Aid..............................................................................................</h2>
-            <h1 id="grandtotalid">Grand Total...................................................................................................</h1>
+          <h1>Calculation Estimates</h1>
+    
+          <div class="infobox">
 
-            <h6><i>*Please note that these are estimates and actual billing cost may vary.</i></h6>
+            <details>
+            <summary id="credithrcostid"></summary><p><b></b>
+            <p>Mandatory student fees assessed to students enrolled in credit courses for costs associated with instruction and related services. Student class level and residency is based upon classification by Registrar's Office. 
+          <br></p>
+          </details>
+          <br>
+          <details>
+            <summary id="univserviceid"></summary>
+            <p>Mandatory fee assessed to all student to support services available to all students.
+          <br></p>
+          </details>
+          <br>
+          <details>
+            <summary  id="transportationid" ></summary>
+            <p>All USI students enrolled in on-campus courses are assessed a Transportation/Parking Fee that funds the upkeep of campus roadways, parking lots, pedestrian sidewalks and paths, and the on-campus shuttle bus service. For more info visit:
+              <br><a href="url">https://www.usi.edu/public-safety/parking/fines-and-fees</a>
+              <br></p>
+          </details>
+          <br>
+          <details>
+            <summary id="studentactivityid"></summary>
+            <p>All USI students enrolled in on-campus courses are assessed the Student Activity. This fee supports various campus resources and activities such as USI Theater, Spring Fest, Student Government Association, Eagle Perks, Intramural Sports, Recreation, Fitness, and Wellness Center, The Shield, Student Organizations, and other various student oriented activities.</p>
+          </details>
+          <br>
+          <details>
+            <summary id="archiebundleid"></summary>
+            <p>Assessed to undergraduate students, this fee is for the University's textbook rental program. To learn more about this program and how it can save you money and time, please visit the Archie's Book Bundle FAQ Page.
+              <br><a href="url">https://www.usi.edu/campus-store/archies-book-bundle</a><br> 
+            </p>
+          </details>
+          <br>
+          <details>
+            <summary id="housingplanid"></summary>
+            <p>Cost of chosen on-campus housing option. For more info visit:
+              <br><a href="url">https://www.usi.edu/housing/housing-options/housing-rates</a><br>
+          </details>
+          <br>
+          <details>
+            <summary id="deaconessid"></summary>
+            <p>To meet the needs of students both with and without private health insurance, the Deaconess Clinic has developed an office visit plan (OVP) for a fee per semester. The OVP covers all office visits incurred during a semester. The plan was developed for the convenience of our students who need easy access to a medical provider between classes, or while away from home. It eliminates any co-payment that may be necessary with other insurance providers and provides discounted fees on certain procedures. Students living in on-campus housing will be assessed this fee as a requirement of on-campus housing.</p>
+          </details>
+          <br>
+          <details>
+            <summary id="mealplanid"></summary>
+            <p>Cost of chosen meal plan. For more info visit:
+              <br><a href="url">https://usi.sodexomyway.com/my-meal-plan</a><br> 
+          </details>
+          <br>
+
+          <h3 id="totalcostid"></h3>
+          <h3 id="aidid"></h3>
+          
+          <hr>
+          <div class="tooltip"><h2 id="grandtotalid"></h2>
+            <span class="tooltiptext">If value is red, then this is the amount owed. If value is green, then this is the rebate amount.</span>
+          </div>
+
+          </div>
+
+
+            <h6><i>*Please note that these are estimates and actual billing costs may vary.</i></h6>
            <!-- <div class="recalctuit"><button type="button" class="btn-primary" onclick="backtoCheckin()">Calculate Tuition Again</button></div>
             <div class="print"><button type="button" class="btn-primary" onClick="window.print()">Print this page</button></div>-->
 
@@ -40,11 +90,9 @@
             </div>
             <br>
             <br>
-            <p>To email yourself this estimate, please enter your email below. </p>
-            <div class="nameinput"><input class="nameinput" placeholder="E-mail..." oninput="this.className = ''"></div>
-            
+            <h6 id="fileupdated"><i>*Fees updated as of: </i></h6>
             </form>
-
+            </div>
     </div>
     </form>
     </fieldset>
@@ -52,6 +100,7 @@
       function backtoCheckin(){
       location.replace("SFSCCheckin.html");
     }
+
 
     var estimatedAid = sessionStorage.getItem("estimatedAid");
     var mjrSelect = sessionStorage.getItem("mjrSelect");
@@ -70,12 +119,20 @@
     var archiesBundle = sessionStorage.getItem("archiesBundle");
 
     </script>
+    <!-- <script src="SFSCCheckin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <script src="parser-checkout.js"></script>
+    <script src="calculations.js"></script>
+    -->
+    </div>
+    
+  </script>
     <!-- <script src="SFSCCheckin.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
     <script src="parser-checkout.js"></script>
     <script src="calculations.js"></script>
-    </div>
 </body>
 
 </html>

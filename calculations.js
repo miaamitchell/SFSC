@@ -6,15 +6,11 @@ async function performcalc()
 {      
       const excelToJSON = new ExcelToJSON();
       await excelToJSON.parseExcel();
-      //const dictionaries = await excelToJSON.parseExcel();
-      
-      //const majorDictionary = dictionaries.majorDictionary;
-      //const housingDictionary = dictionaries.housingDictionary;
-      //const mealDictionary = dictionaries.mealDictionary;
 
       var major = sessionStorage.getItem("mjrSelect");
       var majorData = majorDictionary[major];
-      
+      var fileModified = lastModified;
+
       var estimatedAid = sessionStorage.getItem("estimatedAid");
       var creditHours = sessionStorage.getItem("creditHours");
       var inPersonClasses = sessionStorage.getItem("inPersonClasses");
@@ -28,6 +24,7 @@ async function performcalc()
       var mealPlan = sessionStorage.getItem("mealPlan");
       var housingPlan = sessionStorage.getItem("housingPlan");
       var archieBundle = sessionStorage.getItem("archiesBundle");
+
 
    //Cost for desired credit hours
    if (inState == "Yes") {
@@ -139,9 +136,6 @@ async function performcalc()
    totalCost = addNumbers(majorCost,housingCost,mealPlanCost);
    grandTotal = totalCost - estimatedAid;
 
-   //window.sessionStorage.setItem('totalCost',totalCost);
-
-   // JM Note: Set a value just to show we can make it work....Ryan has code to add/replace this.
    document.getElementById("credithrcostid").innerHTML = "Cost for Desired Credit Hours: $"+majorCost;
    document.getElementById("univserviceid").innerHTML = "University Service Fee: $"+univServiceFee;
    document.getElementById("transportationid").innerHTML = "Transportation/Parking Fee: $"+transportationFee;
@@ -152,7 +146,31 @@ async function performcalc()
    document.getElementById("mealplanid").innerHTML = "Meal Plan: $"+mealPlanCost;
    document.getElementById("totalcostid").innerHTML = "Total Cost: $"+totalCost;
    document.getElementById("aidid").innerHTML = "Estimated Financial Aid: $"+estimatedAid;
-   document.getElementById("grandtotalid").innerHTML = "Estimated Balance: $"+grandTotal;
+   document.getElementById("fileupdated").innerHTML = "Fees and costs updated as of: "+fileModified;
+   
+   var totalOutput = document.getElementById("grandtotalid")
+   var descriptor;
 
+   //changing grand total to refund(green) or cost(red)
+   if (grandTotal >= 0) {
+      totalOutput.style.color = "red";
+      descriptor = "Estimated Cost";
+   }
+   else {
+      totalOutput.style.color = "green";
+      descriptor = "Estimated Refund";
+   }
+   totalOutput.innerText = descriptor +": $"+dollarValue(Math.abs(grandTotal)).toFixed(2);
 }  
+
+//converting string values to numbers and adding fixed decimal
+function dollarValue(value) {
+   if (typeof value === 'string') {
+      return parseFloat(value);
+   }
+   if (typeof value === 'number') {
+      return value;
+   }
+}
+
 performcalc();
