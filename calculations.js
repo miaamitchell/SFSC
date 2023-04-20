@@ -2,23 +2,14 @@ function addNumbers(...nums) {
    return nums.reduce((total, num) => total + Number(num), 0);
 }
 
-function sleep(milliseconds) {  
-  return new Promise(resolve => setTimeout(resolve, milliseconds));  
-}  
-
 async function performcalc() 
 {      
       const excelToJSON = new ExcelToJSON();
-      excelToJSON.parseExcel();
-      
-      // JM Note: Ideally this isn't a hard sleep and actually waits for the function response.
-      await sleep(100);  
+      await excelToJSON.parseExcel();
 
       var major = sessionStorage.getItem("mjrSelect");
       var majorData = majorDictionary[major];
-      
-      console.log(major);
-      console.log(majorData);
+      var fileModified = lastModified;
 
       var estimatedAid = sessionStorage.getItem("estimatedAid");
       var creditHours = sessionStorage.getItem("creditHours");
@@ -33,8 +24,8 @@ async function performcalc()
       var mealPlan = sessionStorage.getItem("mealPlan");
       var housingPlan = sessionStorage.getItem("housingPlan");
       var archieBundle = sessionStorage.getItem("archiesBundle");
-      console.log(archieBundle);
-      console.log(inState);
+
+
    //Cost for desired credit hours
    if (inState == "Yes") {
       costPerCreditHr = (majorData[0]['CostPerCreditHourIN']) * creditHours;
@@ -145,19 +136,18 @@ async function performcalc()
    totalCost = addNumbers(majorCost,housingCost,mealPlanCost);
    grandTotal = totalCost - estimatedAid;
 
-   //window.sessionStorage.setItem('totalCost',totalCost);
-
-
-   document.getElementById("credithrcostid").innerHTML = "Cost for Desired Credit Hours: $"+dollarValue(majorCost).toFixed(2);
-   document.getElementById("univserviceid").innerHTML = "University Service Fee: $"+dollarValue(univServiceFee).toFixed(2);
-   document.getElementById("transportationid").innerHTML = "Transportation/Parking Fee: $"+dollarValue(transportationFee).toFixed(2);
-   document.getElementById("studentactivityid").innerHTML = "Student Activity Fee: $"+dollarValue(studentActivityFee).toFixed(2);
-   document.getElementById("archiebundleid").innerHTML = "Archie's Book Bundle: $"+dollarValue(archieFee).toFixed(2);
-   document.getElementById("housingplanid").innerHTML = "Housing Costs: $"+dollarValue(housingCost).toFixed(2);
-   document.getElementById("deaconessid").innerHTML = "Deaconess Plan: $"+dollarValue(deaconessPlan).toFixed(2);
-   document.getElementById("mealplanid").innerHTML = "Meal Plan: $"+dollarValue(mealPlanCost).toFixed(2);
-   document.getElementById("totalcostid").innerHTML = "Total Cost: $"+ dollarValue(totalCost).toFixed(2);
-   document.getElementById("aidid").innerHTML = "Estimated Financial Aid: $"+dollarValue(estimatedAid).toFixed(2);
+   document.getElementById("credithrcostid").innerHTML = "Cost for Desired Credit Hours: $"+majorCost;
+   document.getElementById("univserviceid").innerHTML = "University Service Fee: $"+univServiceFee;
+   document.getElementById("transportationid").innerHTML = "Transportation/Parking Fee: $"+transportationFee;
+   document.getElementById("studentactivityid").innerHTML = "Student Activity Fee: $"+studentActivityFee;
+   document.getElementById("archiebundleid").innerHTML = "Archie's Book Bundle: $"+archieFee;
+   document.getElementById("housingplanid").innerHTML = "Housing Costs: $"+housingCost;
+   document.getElementById("deaconessid").innerHTML = "Deaconess Plan: $"+deaconessPlan;
+   document.getElementById("mealplanid").innerHTML = "Meal Plan: $"+mealPlanCost;
+   document.getElementById("totalcostid").innerHTML = "Total Cost: $"+totalCost;
+   document.getElementById("aidid").innerHTML = "Estimated Financial Aid: $"+estimatedAid;
+   document.getElementById("fileupdated").innerHTML = "Fees and costs updated as of: "+fileModified;
+   
    var totalOutput = document.getElementById("grandtotalid")
    var descriptor;
 
@@ -170,7 +160,7 @@ async function performcalc()
       totalOutput.style.color = "green";
       descriptor = "Estimated Refund";
    }
-   totalOutput.innerHTML = descriptor +": $"+dollarValue(Math.abs(grandTotal)).toFixed(2);
+   totalOutput.innerText = descriptor +": $"+dollarValue(Math.abs(grandTotal)).toFixed(2);
 }  
 
 //converting string values to numbers and adding fixed decimal
@@ -183,6 +173,11 @@ function dollarValue(value) {
    }
 }
 
-
+function hideForm() {
+   document.getElementById("emailForm").style.display = "none";
+}
+function showForm() {
+   document.getElementById("emailForm").style.display = "block";
+}
 
 performcalc();

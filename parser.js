@@ -21,7 +21,6 @@ var ExcelToJSON = function() {
       // Here is your object
       var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
          if (sheetName == 'majorFees') {
-            
             //mapping list of majors & adding to dropdown selection
             var selectElement = document.getElementById('mjr');
             var majors = XL_row_object.map(t=>t.Majors)
@@ -82,7 +81,3 @@ var ExcelToJSON = function() {
 
 const excelToJSON = new ExcelToJSON();
 excelToJSON.parseExcel();
-
-console.log(majorDictionary);
-
-console.log(majorDictionary);

@@ -11,10 +11,11 @@
 /* Style the input fields */
 input {
   padding: 10px;
-  width: 100%;
+  width: 35%;
   font-size: 17px;
   font-family: Raleway;
   border: 1px solid #aaaaaa;
+  align-content: center;
 }
 
 /* Mark input boxes that gets an error on validation: */
@@ -49,13 +50,17 @@ input.invalid {
   background-color: #68e5b7;
 }
 /*Font */
-h1, h3, h4, h6, h2, p {
+h1, h3, h4, h6, h2 {
     font-family: Outfit,sans-serif;
     text-align: center;
+    padding: 5px;
+}
+h2{
+  color: rgb(0 40 86);
+    
 }
 h1{
-    color: rgb(0 40 86);
-    
+  color: rgb(207 16 45);
 }
 .btn-primary {
   background-color: #002856;
@@ -64,14 +69,6 @@ h1{
   text-align: center;
   margin:auto;
 }
-.nameinput{
-  max-width: 200px;
-  text-align: center;
-  margin:auto;
-}
-/*.loginButton {
-  height: 54px;
-}*/
 .recalctuit {
   text-align: left;
   margin:auto;
@@ -83,10 +80,141 @@ h1{
 
 #outer
 {
-    width:100%;
-    text-align: center;
+  width:100%;
+  text-align: center;
 }
 .inner
 {
-    display: inline-block;
+  display: inline-block;
+}
+select, input {
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  background-color: #fff;
+  color: rgb(0 40 86);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-repeat: no-repeat;
+  background-position: right center;
+  cursor: pointer;
+}
+.infobox {
+  font-family: Outfit,sans-serif;
+  color: navy;
+  font-weight: bold;
+  border: 0px solid black; /* change the box border Opx means no box */
+  padding: 10px;
+  margin: 0 auto;
+  width: 66%; /* changing the infobox size */
+}
+
+/*button styling*/
+button {
+  background-color: navy;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1a508b;
+}
+
+p{
+  font-family: 'Raleway', sans-serif;
+  color:rgb(40 40 40);
+}
+
+.totalcostid{
+  text-align: center;
+}
+  
+form{
+  padding: 1px;
+}
+/*centers aid input box*/
+#aid1 {
+  text-align: center;
+  align-content: center;
+}
+#totalcostid, #aidid, #grandtotalid, .tooltip{
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+  align-content: center; 
+}
+
+/*hover over styling---------------------------------------------------------------------------------------------------------------------------------*/
+.tooltip {
+  position: relative;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  align-content: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+#emailForm {
+  display: none;
+  width: 400px;
+  height: 350px;
+  border-radius: 25px;
+  padding: 20px;
+  color: white;
+  font-size: 20px;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background-color: #002856;
+}
+
+#emailText {
+  width: 90%;
+  font: 'Raleway', sans-serif;
+}
+
+#message {
+  width: 93%;
+}
+
+#validate {
+  display: none;
+  text-align: center;
+  color: red;
+}
+
+#noClasses {
+  display: none;
+  text-align: center;
+  color: red;
+}
+
+#overClasses {
+  display: none;
+  text-align: center;
+  color: red;
 }
