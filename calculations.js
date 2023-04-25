@@ -1,12 +1,9 @@
-function addNumbers(...nums) {
-   return nums.reduce((total, num) => total + Number(num), 0);
-}
-
 async function performcalc() 
 {      
       const excelToJSON = new ExcelToJSON();
       await excelToJSON.parseExcel();
 
+      //getting user selections
       var major = sessionStorage.getItem("mjrSelect");
       var majorData = majorDictionary[major];
       var fileModified = lastModified;
@@ -25,40 +22,40 @@ async function performcalc()
       var housingPlan = sessionStorage.getItem("housingPlan");
       var archieBundle = sessionStorage.getItem("archiesBundle");
 
-
+   //Fee Calculations
    //Cost for desired credit hours
    if (inState == "Yes") {
-      costPerCreditHr = (majorData[0]['CostPerCreditHourIN']) * creditHours;
+      costPerCreditHr = Number((majorData[0]['CostPerCreditHourIN']) * creditHours);
    } else {
-      costPerCreditHr = (majorData[0]['CostPerCreditHourOut']) * creditHours;
+      costPerCreditHr = Number((majorData[0]['CostPerCreditHourOut']) * creditHours);
    }
 
    //University Services Fee
    if (creditHours <=3) {
-      univServiceFee = majorData[0]['UniversityServicesFee3OrFewerCreditHrs'];
+      univServiceFee = Number(majorData[0]['UniversityServicesFee3OrFewerCreditHrs']);
    } else if (creditHours > 3 && creditHours < 8) {
-      univServiceFee = majorData[0]['UniversityServicesFee4To7CreditHours'];
+      univServiceFee = Number(majorData[0]['UniversityServicesFee4To7CreditHours']);
    } else {
-      univServiceFee = majorData[0]['UniversityServicesFee8OrMoreCreditHrs'];
+      univServiceFee = Number(majorData[0]['UniversityServicesFee8OrMoreCreditHrs']);
    }
 
    //Transportation/Parking Fee
    if(inPersonClasses > 1) {
-      transportationFee = majorData[0]['Transportation'];
+      transportationFee = Number(majorData[0]['Transportation']);
    } else {
       transportationFee = 0;
    }
 
    //Student Activity Fee
    if(inPersonClasses + hybridClasses > 0) {
-      studentActivityFee = majorData[0]['StudentActivityFee'];
+      studentActivityFee = Number(majorData[0]['StudentActivityFee']);
    } else {
       studentActivityFee = 0;
    }
 
    //Counseling Fee
    if(inPersonClasses+hybridClasses+onlineClasses > 0) {
-      counselingFee = majorData[0]['CounselingFee'];
+      counselingFee = Number(majorData[0]['CounselingFee']);
    } else {
       counselingFee = 0;
    }
@@ -66,9 +63,9 @@ async function performcalc()
    //Fees for first-semester students:
    //Assessment Fee, Enrollment Fee, Matriculation Fee
    if(firstSemester) {
-      assessmentFee = majorData[0]['AssessmentFee'];
-      enrollmentFee = majorData[0]['EnrollmentFee'];
-      matriculationFee = majorData[0]['MatriculationFee'];
+      assessmentFee = Number(majorData[0]['AssessmentFee']);
+      enrollmentFee = Number(majorData[0]['EnrollmentFee']);
+      matriculationFee = Number(majorData[0]['MatriculationFee']);
    } else {
       assessmentFee = 0;
       enrollmentFee = 0;
@@ -77,29 +74,29 @@ async function performcalc()
 
    //Online Learning Fee
    if(onlineClasses > 0) {
-      onlineFee = (majorData[0]['OnlineLearningFee']) * onlineClasses;
+      onlineFee = Number((majorData[0]['OnlineLearningFee']) * onlineClasses);
    } else {
       onlineFee = 0;
    }
 
    //Hybrid Learning Fee
    if(hybridClasses > 0) {
-      hybridFee = (majorData[0]['HybridFee']) * hybridClasses;
+      hybridFee = Number((majorData[0]['HybridFee']) * hybridClasses);
    } else {
       hybridFee = 0;
    }
 
    //Non-resident Distance Education Fee
    if(inState == false && totalClasses == onlineClasses) {
-      distanceFee = (majorData[0]['NonresDistanceEdFee']) * creditHours;
+      distanceFee = Number((majorData[0]['NonresDistanceEdFee']) * creditHours);
    } else {
       distanceFee = 0;
    }
 
    //Housing Activity Fee & Deaconess Plan
    if(housingPlan) {
-      housingActivityFee = majorData[0]['HousingStudentActivityFee'];
-      deaconessPlan = majorData[0]['DeaconessPlan'];
+      housingActivityFee = Number(majorData[0]['HousingStudentActivityFee']);
+      deaconessPlan = Number(majorData[0]['DeaconessPlan']);
    } else {
       housingActivityFee = 0;
       deaconessPlan = 0;
@@ -107,35 +104,40 @@ async function performcalc()
 
    //Archie's Book Bundle
    if(archieBundle == "Yes") {
-      archieFee = (majorData[0]['ArchiesBookBundle'])*creditHours;
+      archieFee = Number((majorData[0]['ArchiesBookBundle'])*creditHours);
    } else {
       archieFee = 0;
    }
 
    //Program Fees
-   program100 = (majorData[0]['100LevelProgramFees']) * classes100;
-   program200 = (majorData[0]['200LevelProgramFees']) * classes200;
-   program300 = (majorData[0]['300LevelProgramFees']) * classes300;
-   program400 = (majorData[0]['400LevelProgramFees']) * classes400;
+   program100 = Number((majorData[0]['100LevelProgramFees']) * classes100);
+   program200 = Number((majorData[0]['200LevelProgramFees']) * classes200);
+   program300 = Number((majorData[0]['300LevelProgramFees']) * classes300);
+   program400 = Number((majorData[0]['400LevelProgramFees']) * classes400);
    programFee = program100 + program200 + program300 + program400;
 
    //Athletics Fees
-   athleticsFee = majorData[0]['AthleticsFee'];
+   athleticsFee = Number(majorData[0]['AthleticsFee']);
 
    //Total Semester Cost for Major
-   majorCost = addNumbers(costPerCreditHr,univServiceFee,programFee,studentActivityFee,counselingFee,transportationFee,assessmentFee,enrollmentFee,matriculationFee,onlineFee,hybridFee,housingActivityFee,deaconessPlan,archieFee,athleticsFee);
+   majorCost = costPerCreditHr+univServiceFee+programFee+studentActivityFee+counselingFee+transportationFee+assessmentFee+enrollmentFee+matriculationFee+onlineFee+hybridFee+housingActivityFee+deaconessPlan+archieFee+athleticsFee;
 
+   //assigning housingData as information from housingDictionary based on user's selected housingPlan
    var housingData = housingDictionary[housingPlan];
+   //assigning housingCost the Cost column value from housingData
+   housingCost = Number(housingData[0]['Cost']);
 
-   housingCost = housingData[0]['Cost'];
-
+   //assigning mealData as information from mealDictionary based on user's selected mealPlan
    var mealData = mealDictionary[mealPlan];
+   //assigning mealPlanCost the Cost column value from mealData
+   mealPlanCost = Number(mealData[0]['Cost']);
 
-   mealPlanCost = mealData[0]['Cost'];
-
-   totalCost = addNumbers(majorCost,housingCost,mealPlanCost);
+   //Total Cost for Semester
+   totalCost = majorCost+housingCost+mealPlanCost;
+   //Estimated Balance
    grandTotal = totalCost - estimatedAid;
 
+   //showing fees/costs in Post-CalcSFSC.html based on element id
    document.getElementById("credithrcostid").innerHTML = "Cost for Desired Credit Hours: $"+majorCost;
    document.getElementById("univserviceid").innerHTML = "University Service Fee: $"+univServiceFee;
    document.getElementById("transportationid").innerHTML = "Transportation/Parking Fee: $"+transportationFee;
@@ -158,11 +160,12 @@ async function performcalc()
    }
    else {
       totalOutput.style.color = "green";
-      descriptor = "Estimated Refund";
+      descriptor = "Estimated Rebate";
    }
-   totalOutput.innerText = descriptor +": $"+dollarValue(Math.abs(grandTotal)).toFixed(2);
+   totalOutput.innerText = descriptor +": $"+Math.abs(grandTotal).toFixed(2);
 }  
 
+/*
 //converting string values to numbers and adding fixed decimal
 function dollarValue(value) {
    if (typeof value === 'string') {
@@ -172,5 +175,6 @@ function dollarValue(value) {
       return value;
    }
 }
+*/
 
 performcalc();
