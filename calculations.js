@@ -7,6 +7,7 @@ async function performcalc()
       var major = sessionStorage.getItem("mjrSelect");
       var majorData = majorDictionary[major];
       var fileModified = lastModified;
+      console.log('File Modified: '+lastModified);
 
       var estimatedAid = sessionStorage.getItem("estimatedAid");
       var creditHours = sessionStorage.getItem("creditHours");
@@ -150,10 +151,10 @@ async function performcalc()
    document.getElementById("aidid").innerHTML = "Estimated Financial Aid: $"+estimatedAid;
    document.getElementById("fileupdated").innerHTML = "Fees and costs updated as of: "+fileModified;
    
-   var totalOutput = document.getElementById("grandtotalid")
+   var totalOutput = document.getElementById("grandtotalid");
    var descriptor;
 
-   //changing grand total to refund(green) or cost(red)
+   //changing grand total to rebate(green) or cost(red)
    if (grandTotal >= 0) {
       totalOutput.style.color = "red";
       descriptor = "Estimated Cost";
@@ -164,17 +165,5 @@ async function performcalc()
    }
    totalOutput.innerText = descriptor +": $"+Math.abs(grandTotal).toFixed(2);
 }  
-
-/*
-//converting string values to numbers and adding fixed decimal
-function dollarValue(value) {
-   if (typeof value === 'string') {
-      return parseFloat(value);
-   }
-   if (typeof value === 'number') {
-      return value;
-   }
-}
-*/
 
 performcalc();

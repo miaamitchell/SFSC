@@ -1,9 +1,6 @@
 //Garrett DiDomizio, Mia Mitchell, Yifei Jiao, Ryan Pritchett Contact: gdidomizio@eagles.usi.edu Last Updated: 3/23/2023
 //This JavaScript Document controls the form
 //
-//
-//
-//
 function backtoCheckin(){
   location.replace("SFSCCheckin.html");
 }
@@ -13,8 +10,7 @@ showTab(currentTab); // Display the current tab
 function showTab(n) {
   // This function will display the specified tab of the form ...
   var x = document.getElementsByClassName("tab");
-  //console.log(x);
-  //console.log(n);
+  
   x[n].style.display = "block";
   // ... and fix the Previous/Next buttons:
   if (n == 0) {
@@ -33,10 +29,7 @@ function showTab(n) {
 }
 
 function nextPrev(n) {
-  console.log("this is the current tab:" +currentTab);
-  console.log(n);
   if(parseInt(n) == 1){
-    console.log("Advanced tab; need to validate it")
     //validation for each of the requuired fields for calculations to succeed.
     if(currentTab == 0 && !validatemajorSelected()){
       //if validation failed, return without proceeding pasgt 1st tab
@@ -93,12 +86,10 @@ function nextPrev(n) {
 
 
 function validateForm(){
-  console.log("Validating tab "+currentTab);
 
   // This function deals with validation of the form fields
   var x, y, i, valid = true;
   x = document.getElementsByClassName("tab");
-  console.log(x[currentTab]);
   y = x[currentTab].getElementsByTagName("input");
   var selects = x[currentTab].getElementsByTagName("select"); // get all select elements in the current tab
   // A loop that checks every input field and select element in the current tab:
@@ -127,17 +118,6 @@ function validateForm(){
   return valid; // return the valid status
 }
 
-
-//More validation
-// Get references to the select menus
-//const inPersonClassesSelect = document.querySelector("input[name='In-Person Classes']");
-//const onlineClassesSelect = document.querySelector("input[name='Online Classes']");
-//const hybridClassesSelect = document.querySelector("input[name='Hybrid Classes']");
-
-//console.log("In Person log = "+inPersonClassesSelect.value);
-//console.log("In online log = "+onlineClassesSelect.value);
-//console.log("In hybrid log = "+hybridClassesSelect.value);
-
 // Get a reference to the form and prevent it from submitting by default
 document.getElementById("regForm").addEventListener("submit", function(event) {
   event.preventDefault();
@@ -161,7 +141,6 @@ document.getElementById("regForm").addEventListener("submit", function(event) {
 
   // Check that credit hours are greater than 0
   if (inPersonClasses+onlineClasses+hybridClasses == 0) {
-    console.log("all class types = 0");
     alert("Please select a number of credit hours greater than 0.");
     return;
   }
@@ -214,7 +193,6 @@ function sessionSave(){
   sessionStorage.setItem("mealPlan", selectedmealPlan.text);
   sessionStorage.setItem("housingPlan", selectedhousingPlan.text);
   sessionStorage.setItem("archiesBundle", selectedarchiesPlan.text);
-  console.log(archiesBundle);
   
   // Use the stored value in your JavaScript code
   //console.log("Number of credit hours selected: " + selectedCreditHours);
@@ -229,14 +207,12 @@ function sessionSave(){
       var selectedCreditHours = document.getElementsByName("Number of Credit Hours")[0].value;
     // Example credit hours
   const levelCredits = parseInt(selectedhundredLevel) + parseInt(selectedtwohundredLevel) + parseInt(selectedthreehundredLevel) + parseInt(selectedfourhundredLevel);//adds amount of credits selected from each level
-  console.log("Credit Hours w/level identified = "+levelCredits)
-  console.log("Selected Hours = "+selectedCreditHours)
   // Validate credit hours for each level
   //let input = document.getElementById("hundredL", "twohundredL", "threehundredL", "fourhundredL");
   if (levelCredits > parseInt(selectedCreditHours)) {//if amount of credits in major is greater than overall credits selected on first screen validation will fail
     //input.style.color= "red";
       input.style.background = "rgb(234 158 170)";
-      alert("Credit hours for all levels exceed total credit hours selected.");
+      alert("Credit hours for all levels exceed total credit hours selected");
       return false; 
     }
   // If all credit hours are valid
@@ -250,10 +226,10 @@ var selectedinPersonClasses = document.getElementsByName("In-Person Classes")[0]
 var selectedonlineClasses = document.getElementsByName("Online Classes")[0].value;
 var selectedhybridClasses = document.getElementsByName("Hybrid Classes")[0].value;
 const classesTaken = parseInt(selectedinPersonClasses) + parseInt(selectedhybridClasses) + parseInt(selectedonlineClasses);
-console.log("Amount of classes of any type equals" + classesTaken)
+
 //let input = document.getElementById("IP");
 if (classesTaken < 1){// if the amount of type of classes taken is less than one, validation will fail, as at least 1 class of 1 type has to be taken.
-  alert("No classes were selected."); //validate that at least one class type is selected.
+  alert("No classes were selected"); //validate that at least one class type is selected.
   //input.style.background = "rgb(234 158 170)";
   return false;
 }
@@ -266,7 +242,7 @@ function validatemajorSelected()
   var selectedmajor = document.getElementById("mjr").options[document.getElementById("mjr").selectedIndex];//call value from session
   let input = document.getElementById("mjr");
   if (selectedmajor.value == 1){//if major stays as default value defined in html(1), then validation will fail.
-  alert("Please select a major."); //validates that a major was selected
+  alert("Please select a major"); //validates that a major was selected
   input.style.background = "rgb(234 158 170)";
   return false;
   }
@@ -279,7 +255,7 @@ function validatemealPlan()
   var selectedmealPlan = document.getElementById("meal").options[document.getElementById("meal").selectedIndex];//call value from session
   let input = document.getElementById("meal");
   if (selectedmealPlan.value == 1){ //if meal plan stays as default value defined in html(1), then validation will fail.
-    alert("Please select a meal plan."); //validates that a major was selected
+    alert("Please select a meal plan"); //validates that a major was selected
     input.style.background = "rgb(234 158 170)";
     return false;
     }

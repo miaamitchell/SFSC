@@ -8,16 +8,15 @@ var ExcelToJSON = function() {
    //parsing XLSX
    this.parseExcel = function() {
       return new Promise((resolve,reject) => {
-         //var file = "https://pilotusi-my.sharepoint.com/:x:/r/personal/mmitchell1_eagles_usi_edu/Documents/Fees.xlsx?d=w221a6e8e9a2849e39bfece2de096339e&csf=1&web=1&e=EDcqHE";
          var file = "https://usi-outreach-tsisc-safety-badge-system.s3.amazonaws.com/Public/SFSC/Fees.xlsx";
-         //var file = "./Fees.xlsx";
+
          var xhr = new XMLHttpRequest();
          xhr.open('GET', file, true);
          xhr.responseType = 'arraybuffer';
          xhr.onload = function(e) {
             var data = new Uint8Array(xhr.response);
+            //get the date file was last modified
             lastModified = xhr.getResponseHeader('Last-Modified');
-            console.log(lastModified);
             var workbook = XLSX.read(data, { type: 'array'});
 
             workbook.SheetNames.forEach(function(sheetName) {
@@ -27,6 +26,7 @@ var ExcelToJSON = function() {
    
             //populating dictionaries based on column key
                var column = 'Majors';
+               //populating majorDictionary
                for (var i = 0; i < XL_row_object.length; i++) {
                   var value = XL_row_object[i][column];
                   if (value in majorDictionary) {
@@ -36,36 +36,36 @@ var ExcelToJSON = function() {
                   }
                }
             } else if (sheetName == 'housingFees') {
-            var column = 'Housing';
-            var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+               var column = 'Housing';
+               var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
 
-            //populating dictionary
-            for (var i = 0; i < XL_row_object.length; i++) {
-               var value = XL_row_object[i][column];
-               if (value in housingDictionary) {
-                  housingDictionary[value].push(XL_row_object[i]);
-               } else {
-                  housingDictionary[value] = [XL_row_object[i]];
+               //populating housingDictionary
+               for (var i = 0; i < XL_row_object.length; i++) {
+                  var value = XL_row_object[i][column];
+                  if (value in housingDictionary) {
+                     housingDictionary[value].push(XL_row_object[i]);
+                  } else {
+                     housingDictionary[value] = [XL_row_object[i]];
+                  }
                }
-            }
             } else if (sheetName == 'mealPlans') {
-            var column = 'MealPlan';
-            var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+               var column = 'MealPlan';
+               var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
 
-            //populating dictionary
-            for (var i = 0; i < XL_row_object.length; i++) {
-               var value = XL_row_object[i][column];
-               if (value in mealDictionary) {
-                  mealDictionary[value].push(XL_row_object[i]);
-               } else {
-                  mealDictionary[value] = [XL_row_object[i]];
+               //populating mealDictionary
+               for (var i = 0; i < XL_row_object.length; i++) {
+                  var value = XL_row_object[i][column];
+                  if (value in mealDictionary) {
+                     mealDictionary[value].push(XL_row_object[i]);
+                  } else {
+                     mealDictionary[value] = [XL_row_object[i]];
+                  }
                }
             }
-            }
-   });
-   resolve();
+            });
+            resolve();
+         };
+         xhr.send();
+      });
    };
-   xhr.send();
-});
-};
 };
