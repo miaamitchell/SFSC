@@ -237,7 +237,7 @@ function validatemajorSelected()
   return false;
   }
   //if major was selected
-  return true;
+    return true;
 }
 
 function validatemealPlan()

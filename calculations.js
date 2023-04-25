@@ -179,5 +179,4 @@ function hideForm() {
 function showForm() {
    document.getElementById("emailForm").style.display = "block";
 }
-
 performcalc();
