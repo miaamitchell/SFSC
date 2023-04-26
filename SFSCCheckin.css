@@ -55,12 +55,22 @@
     text-align: center;
     padding: 5px;
 }
+.sfsch6{
+  font-size: .67em;
+}
+.sfsch4 {
+  font-size: 1em;
+}
+.sfsch3{
+  font-size: 1.17em;
+}
 .sfsch2{
   color: rgb(0 40 86);
-    
+  font-size: 1.5em;
 }
 .sfsch1{
   color: rgb(207 16 45);
+  font-size: 2em;
 }
 .btn-primary {
   background-color: #002856;
@@ -92,6 +102,7 @@
   text-align: center;
   font-size: 16px;
   padding: 10px;
+  padding-right: 20px;
   background-color: #fff;
   color: rgb(0 40 86);
   border: 1px solid #ccc;
