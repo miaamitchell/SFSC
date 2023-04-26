@@ -122,6 +122,7 @@ function validateForm(){
 document.getElementById("regForm").addEventListener("submit", function(event) {
   event.preventDefault();
 
+  /*
   // Get the selected values from the select menus
   const creditHours = parseInt(creditHoursSelect.value);
   const inPersonClasses = parseInt(inPersonClassesSelect.value);
@@ -138,12 +139,14 @@ document.getElementById("regForm").addEventListener("submit", function(event) {
   const mealPlan = true;
   const housingPlan = true;
   const archiesBundle = true;
+  
 
   // Check that credit hours are greater than 0
   if (inPersonClasses+onlineClasses+hybridClasses == 0) {
     alert("Please select a number of credit hours greater than 0.");
     return;
   }
+  */
 
   // If validation passes, submit the form
   form.submit();
@@ -195,8 +198,6 @@ function sessionSave(){
   sessionStorage.setItem("archiesBundle", selectedarchiesPlan.text);
   
   // Use the stored value in your JavaScript code
-  //console.log("Number of credit hours selected: " + selectedCreditHours);
-  //console.log("The number of in person credit hours is: " + selectedinPersonClasses);
   }
   function validatecreditHours()
   {
@@ -208,15 +209,16 @@ function sessionSave(){
     // Example credit hours
   const levelCredits = parseInt(selectedhundredLevel) + parseInt(selectedtwohundredLevel) + parseInt(selectedthreehundredLevel) + parseInt(selectedfourhundredLevel);//adds amount of credits selected from each level
   // Validate credit hours for each level
-  //let input = document.getElementById("hundredL", "twohundredL", "threehundredL", "fourhundredL");
   if (levelCredits > parseInt(selectedCreditHours)) {//if amount of credits in major is greater than overall credits selected on first screen validation will fail
-    //input.style.color= "red";
-      input.style.background = "rgb(234 158 170)";
-      alert("Credit hours for all levels exceed total credit hours selected");
+      valHours();
+      // alert("Credit hours for all levels exceed total credit hours selected.");
       return false; 
     }
   // If all credit hours are valid
-  return true;
+  else {
+    hideValHours();
+    return true;
+  }
   }
 
 
@@ -227,14 +229,24 @@ var selectedonlineClasses = document.getElementsByName("Online Classes")[0].valu
 var selectedhybridClasses = document.getElementsByName("Hybrid Classes")[0].value;
 const classesTaken = parseInt(selectedinPersonClasses) + parseInt(selectedhybridClasses) + parseInt(selectedonlineClasses);
 
-//let input = document.getElementById("IP");
 if (classesTaken < 1){// if the amount of type of classes taken is less than one, validation will fail, as at least 1 class of 1 type has to be taken.
-  alert("No classes were selected"); //validate that at least one class type is selected.
-  //input.style.background = "rgb(234 158 170)";
+  hideValClass();
+  noClasses();
+  // alert("No classes were selected."); //validate that at least one class type is selected.
+  return false;
+}
+else if (classesTaken > 10) {
+  hideNoClasses();
+  valClasses();
+
   return false;
 }
 //if classes taken is greater than 1
-return true;
+else {
+  hideNoClasses();
+  hideValClass();
+  return true;
+}
 }
 
 function validatemajorSelected()
@@ -242,12 +254,12 @@ function validatemajorSelected()
   var selectedmajor = document.getElementById("mjr").options[document.getElementById("mjr").selectedIndex];//call value from session
   let input = document.getElementById("mjr");
   if (selectedmajor.value == 1){//if major stays as default value defined in html(1), then validation will fail.
-  alert("Please select a major"); //validates that a major was selected
+  alert("Please select a major."); //validates that a major was selected
   input.style.background = "rgb(234 158 170)";
   return false;
   }
   //if major was selected
-  return true;
+    return true;
 }
 
 function validatemealPlan()
@@ -255,7 +267,7 @@ function validatemealPlan()
   var selectedmealPlan = document.getElementById("meal").options[document.getElementById("meal").selectedIndex];//call value from session
   let input = document.getElementById("meal");
   if (selectedmealPlan.value == 1){ //if meal plan stays as default value defined in html(1), then validation will fail.
-    alert("Please select a meal plan"); //validates that a major was selected
+    alert("Please select a meal plan."); //validates that a major was selected
     input.style.background = "rgb(234 158 170)";
     return false;
     }
@@ -274,12 +286,36 @@ function validateHousing()
     return true;
 }
 function validateAid(){
-  //let input = document.getElementById("estAidof");
+  let input = document.getElementById("estAidof");
   var estaid = document.getElementsByName("aidinputted")[0].value;
-  if (estaid.value == NaN){
-    //input.style.background = "rgb(234 158 170)";
-    //alert("No aid money was entered, to go forward please enter an amount without a comma or dollar sign")
+  if (estaid == ""){
+    input.style.background = "rgb(234 158 170)";
+    alert("No aid money was entered, to go forward please enter an amount without a comma or dollar sign")
     return false;
   }
   return true;
+}
+
+function valHours() {
+  document.getElementById("validate").style.display = "block";
+}
+
+function hideValHours() {
+  document.getElementById("validate").style.display = "none";
+}
+
+function noClasses() {
+  document.getElementById("noClasses").style.display = "block";
+}
+
+function valClasses() {
+  document.getElementById("overClasses").style.display = "block";
+}
+
+function hideValClass() {
+  document.getElementById("overClasses").style.display = "none";
+}
+
+function hideNoClasses() {
+  document.getElementById("noClasses").style.display = "none";
 }

@@ -9,7 +9,7 @@
 }
 
 /* Style the input fields */
-input {
+.nameinput {
   padding: 10px;
   width: 35%;
   font-size: 17px;
@@ -19,7 +19,7 @@ input {
 }
 
 /* Mark input boxes that gets an error on validation: */
-input.invalid {
+.nameinput.invalid {
   background-color: #dd8787;
 }
 
@@ -50,17 +50,27 @@ input.invalid {
   background-color: #68e5b7;
 }
 /*Font */
-h1, h3, h4, h6, h2 {
+.sfsch1, .sfsch3, .sfsch4, .sfsch6, .sfsch2 {
     font-family: Outfit,sans-serif;
     text-align: center;
     padding: 5px;
 }
-h2{
-  color: rgb(0 40 86);
-    
+.sfsch6{
+  font-size: .67em;
 }
-h1{
+.sfsch4 {
+  font-size: 1em;
+}
+.sfsch3{
+  font-size: 1.17em;
+}
+.sfsch2{
+  color: rgb(0 40 86);
+  font-size: 1.5em;
+}
+.sfsch1{
   color: rgb(207 16 45);
+  font-size: 2em;
 }
 .btn-primary {
   background-color: #002856;
@@ -87,7 +97,7 @@ h1{
 {
   display: inline-block;
 }
-select, input {
+.sfscselect, .nameinput {
   font-family: 'Raleway', sans-serif;
   text-align: center;
   font-size: 16px;
@@ -114,7 +124,7 @@ select, input {
 }
 
 /*button styling*/
-button {
+.sfscbutton {
   background-color: navy;
   color: white;
   border: none;
@@ -125,21 +135,17 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.sfscbutton:hover {
   background-color: #1a508b;
 }
 
-p{
+.sfscp{
   font-family: 'Raleway', sans-serif;
   color:rgb(40 40 40);
 }
 
 .totalcostid{
   text-align: center;
-}
-  
-form{
-  padding: 1px;
 }
 /*centers aid input box*/
 #aid1 {
@@ -175,4 +181,47 @@ form{
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+#emailForm {
+  display: none;
+  width: 400px;
+  height: 350px;
+  border-radius: 25px;
+  padding: 20px;
+  color: white;
+  font-size: 20px;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background-color: #002856;
+  text-align: center;
+}
+
+#emailText {
+  width: 90%;
+  font: 'Raleway', sans-serif;
+}
+
+#message {
+  width: 93%;
+}
+
+#validate {
+  display: none;
+  text-align: center;
+  color: red;
+}
+
+#noClasses {
+  display: none;
+  text-align: center;
+  color: red;
+}
+
+#overClasses {
+  display: none;
+  text-align: center;
+  color: red;
 }

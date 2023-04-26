@@ -166,4 +166,11 @@ async function performcalc()
    totalOutput.innerText = descriptor +": $"+Math.abs(grandTotal).toFixed(2);
 }  
 
+function hideForm() {
+   document.getElementById("emailForm").style.display = "none";
+}
+function showForm() {
+   document.getElementById("emailForm").style.display = "block";
+}
+
 performcalc();
