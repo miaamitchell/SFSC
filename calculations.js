@@ -43,7 +43,7 @@ async function performcalc()
    }
 
    //Transportation/Parking Fee
-   if(inPersonClasses > 1) {
+   if(inPersonClasses > 0) {
       transportationFee = majorData[0]['Transportation'];
    } else {
       transportationFee = 0;
@@ -65,7 +65,7 @@ async function performcalc()
 
    //Fees for first-semester students:
    //Assessment Fee, Enrollment Fee, Matriculation Fee
-   if(firstSemester) {
+   if(firstSemester == "Yes") {
       assessmentFee = majorData[0]['AssessmentFee'];
       enrollmentFee = majorData[0]['EnrollmentFee'];
       matriculationFee = majorData[0]['MatriculationFee'];
@@ -97,7 +97,7 @@ async function performcalc()
    }
 
    //Housing Activity Fee & Deaconess Plan
-   if(housingPlan) {
+   if(housingPlan != "Living Off-Campus") {
       housingActivityFee = majorData[0]['HousingStudentActivityFee'];
       deaconessPlan = majorData[0]['DeaconessPlan'];
    } else {
@@ -123,7 +123,7 @@ async function performcalc()
    athleticsFee = majorData[0]['AthleticsFee'];
 
    //Total Semester Cost for Major
-   majorCost = addNumbers(costPerCreditHr,univServiceFee,programFee,studentActivityFee,counselingFee,transportationFee,assessmentFee,enrollmentFee,matriculationFee,onlineFee,hybridFee,housingActivityFee,deaconessPlan,archieFee,athleticsFee);
+   majorCost = addNumbers(costPerCreditHr,univServiceFee,programFee,studentActivityFee,counselingFee,transportationFee,assessmentFee,enrollmentFee,matriculationFee,onlineFee,hybridFee,housingActivityFee,deaconessPlan,archieFee,athleticsFee,distanceFee);
 
    var housingData = housingDictionary[housingPlan];
 
@@ -136,7 +136,17 @@ async function performcalc()
    totalCost = addNumbers(majorCost,housingCost,mealPlanCost);
    grandTotal = totalCost - estimatedAid;
 
-   document.getElementById("credithrcostid").innerHTML = "Cost for Desired Credit Hours: $"+majorCost;
+   document.getElementById("credithrcostid").innerHTML = "Cost for Desired Credit Hours: $"+costPerCreditHr;
+   document.getElementById("programfeeid").innerHTML = "Program Fee: $"+programFee;
+   document.getElementById("counselingfeeid").innerHTML = "Counseling Fee: $"+counselingFee;
+   document.getElementById("assessmentfeeid").innerHTML = "Assessment Fee: $"+assessmentFee;
+   document.getElementById("enrollmentfeeid").innerHTML = "Enrollment Fee: $"+enrollmentFee;
+   document.getElementById("matriculationfeeid").innerHTML = "Matriculation Fee: $"+matriculationFee;
+   document.getElementById("onlinefeeid").innerHTML = "Online Learning Fee: $"+onlineFee;
+   document.getElementById("hybridfeeid").innerHTML = "Hybrid Learning Fee: $"+hybridFee;
+   document.getElementById("housingactivityfeeid").innerHTML = "Housing Student Activity Fee: $"+housingActivityFee;
+   document.getElementById("athleticsfeeid").innerHTML = "Athletics Fee: $"+athleticsFee;
+   document.getElementById("distancefeeid").innerHTML = "Nonresident Distance Education Fee: $"+distanceFee;
    document.getElementById("univserviceid").innerHTML = "University Service Fee: $"+univServiceFee;
    document.getElementById("transportationid").innerHTML = "Transportation/Parking Fee: $"+transportationFee;
    document.getElementById("studentactivityid").innerHTML = "Student Activity Fee: $"+studentActivityFee;
@@ -147,6 +157,7 @@ async function performcalc()
    document.getElementById("totalcostid").innerHTML = "Total Cost: $"+totalCost;
    document.getElementById("aidid").innerHTML = "Estimated Financial Aid: $"+estimatedAid;
    document.getElementById("fileupdated").innerHTML = "Fees and costs updated as of: "+fileModified;
+
    
    var totalOutput = document.getElementById("grandtotalid")
    var descriptor;
@@ -154,11 +165,11 @@ async function performcalc()
    //changing grand total to refund(green) or cost(red)
    if (grandTotal >= 0) {
       totalOutput.style.color = "red";
-      descriptor = "Estimated Cost";
+      descriptor = "Estimated Amount Due";
    }
    else {
       totalOutput.style.color = "green";
-      descriptor = "Estimated Refund";
+      descriptor = "Estimated Credit Balance";
    }
    totalOutput.innerText = descriptor +": $"+dollarValue(Math.abs(grandTotal)).toFixed(2);
 }  
@@ -173,10 +184,10 @@ function dollarValue(value) {
    }
 }
 
-function hideForm() {
-   document.getElementById("emailForm").style.display = "none";
-}
-function showForm() {
-   document.getElementById("emailForm").style.display = "block";
-}
+// function hideForm() {
+//    document.getElementById("emailForm").style.display = "none";
+// }
+// function showForm() {
+//    document.getElementById("emailForm").style.display = "block";
+// }
 performcalc();
