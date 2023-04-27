@@ -20,14 +20,84 @@
           <div class="infobox">
 
             <details>
-            <summary id="credithrcostid"></summary><p class="sfscp">
-            <p class="sfscp"><i>Mandatory student fees assessed to students enrolled in credit courses for costs associated with instruction and related services. Student class level and residency is based upon classification by Registrar's Office. </i>
+            <summary id="credithrcostid"></summary><p  class="sfscp"><b></b>
+            <p class="sfscp"><i>Mandatory student fees assessed to students enrolled in credit courses for costs associated with instruction and related services. Student class level and residency is based upon classification by Registrar's Office.</i>
+          <br></p>
+          </details>
+          <br>
+          <details>
+            <summary id="programfeeid"></summary><p  class="sfscp"><b></b>
+            <p class="sfscp"><i>Vary based on program. For more information:</i>
+              <br><a href="https://www.usi.edu/bursar/tuition-fees/explanation-of-fees" target="_blank"><i>https://www.usi.edu/bursar/tuition-fees/explanation-of-fees</i></a>
+          <br></p>
+          </details>
+          <br>
+          <details>
+            <summary id="counselingfeeid"></summary><p  class="sfscp"><b></b>
+            <p class="sfscp"><i>The Counseling Center fee supports availability of professional counseling for students struggling with emotional, personal, relational and academically-based concerns. This fee also supports in person and online programs, available to all USI students, on topics including but not limited to: healthy communication, stress management and overcoming anxiety. All programs and services supported by this fee (including services available through the Multicultural Center and Title IX office) are designed to improve the health of our community and to help students succeed academically and thrive in life beyond USI
+            </i>
+          <br></p>
+          </details>
+          <br>
+          <details>
+            <summary id="assessmentfeeid"></summary><p  class="sfscp"><b></b>
+            <p class="sfscp"><i>One time cost charged to most undergraduate students to cover the TK20 software. Tk20 is a comprehensive data management system that allows students to be active online participants in multiple areas of their college experience including course instruction, field experiences, and sharing of assessment data. This fee is non-refundable.
+            </i>
+          <br></p>
+          </details>
+          <br>
+          <details>
+            <summary id="enrollmentfeeid"></summary><p  class="sfscp"><b></b>
+            <p class="sfscp"><i>One time cost charged to most undergraduate students to cover the unique cost with enrolling in the University. Limited exemptions are applied to students with a particular enrollment status as defined by the Registrar's Office. This fee is non-refundable.
+            </i>
+          <br></p>
+          </details>
+          <br>
+          <details>
+            <summary id="matriculationfeeid"></summary><p  class="sfscp"><b></b>
+            <p class="sfscp"><i>One time cost charged to most undergraduate students to cover the costs of new student orientation, welcome week, and other on-boarding activities. This fee is non-refundable.
+            </i>
+          <br></p>
+          </details>
+          <br>
+          <details>
+            <summary id="onlinefeeid"></summary><p  class="sfscp"><b></b>
+            <p class="sfscp"><i>Fee associated with offering courses online (DE campus code). This fee supports the mission of Online Learning in the design, development, and implementation of innovative and engaging high-quality online learning experiences.
+            </i>
+          <br></p>
+          </details>
+          <br>
+          <details>
+            <summary id="hybridfeeid"></summary><p  class="sfscp"><b></b>
+            <p class="sfscp"><i>Fee associated with offering a hybrid of both in-person and online instruction (HY campus code). This fee supports the cost of the design, development, and implementation of innovative and engaging high-quality hybrid learning experiences.
+            </i>
+          <br></p>
+          </details>
+          <br>
+          <details>
+            <summary id="housingactivityfeeid"></summary><p  class="sfscp"><b></b>
+            <p class="sfscp"><i>Charged to all students living in on-campus housing. As a part of our housing community, residents take advantage of the rich variety of educational, social, cultural and recreational activities. The activity fee supports Student Housing Association, National Residence Hall Honorary, area councils, and programming events.
+            </i>
+          <br></p>
+          </details>
+          <br>
+          <details>
+            <summary id="athleticsfeeid"></summary><p  class="sfscp"><b></b>
+            <p class="sfscp"><i>The Athletics Fee is based on the projected costs of transitioning from Division II to Division I athletics as documented by an exploratory committee report. The Board of Trustees approved the decision to become Division I in February 2022 and the Athletics Fee in July 2022. The University is a public institution and determines tuition and fees based on the cost of providing education and services to all students. While a particular student may not utilize every service the University offers, including attending University athletic events, spreading the cost of services across a larger student population allows the most access for the most students.
+            </i>
+          <br></p>
+          </details>
+          <br>
+          <details>
+            <summary id="distancefeeid"></summary><p  class="sfscp"><b></b>
+            <p class="sfscp"><i>Fee to nonresident students enrolled in all online courses associated with offering courses online (DE campus code)
+            </i>
           <br></p>
           </details>
           <br>
           <details>
             <summary id="univserviceid"></summary>
-            <p class="sfscp"><i>Mandatory fee assessed to all student to support services available to all students. </i>
+            <p class="sfscp"><i>Mandatory fee assessed to all student to support services available to all students.</i>
           <br></p>
           </details>
           <br>
@@ -69,30 +139,35 @@
           <br>
 
           <h3 id="totalcostid"></h3>
-          <h3 id="aidid">&nbsp;</h3>
+          <h3 id="aidid"></h3>
           
           <hr>
-          <div class="tooltip"><h2 id="grandtotalid">&nbsp;</h2>
-            <span class="tooltiptext">If value is red, then this is the amount owed. If value is green, then this is the rebate amount.</span>
-          </div>
+          <div class="tooltip"><h2 id="grandtotalid"></h2>
+            <span class="tooltiptext">If value is red, then this is the estimated amount due. If value is green, then this is the estimated credit.</span>
           </div>
 
-          <h6 class="sfsch6"><i>*Please note that these are estimates and actual billing costs may vary.</i></h6>
+          </div>
 
+
+            <h6 class="sfsch6"><i>*Please note that these are estimates and actual billing costs may vary.</i></h6>
+            
             <div id="outer">
               <div class="inner"><button type="submit" class="sfscbutton" onClick="backtoCheckin()" >Calculate Tuition Again</button></div>
               <div class="inner"><button type="submit" class="sfscbutton" onClick="window.print()">Print Estimate</button></div>
-              <!--<div class="inner"><button type="submit" class="sfscbutton" onclick="showForm()" value="Contact Us">Contact Us</button></div> -->
+              <!-- <div class="inner"><button type="submit" class="sfscbutton" onclick="showForm()" value="Contact Us">Contact Us</button></div> -->
+              
             </div>
             <br>
+            <h4 class="sfsch4">For questions about budgeting, contact the Student Financial Success Center at financial.success@usi.edu</h4>
+            <h4 class="sfsch4">For questions about fees or billing, contact the Bursar's office at bursar@usi.edu</h4>
             <br>
             <h6 class="sfsch6" id="fileupdated"><i>*Fees updated as of: </i></h6>
             </form>
             </div>
+        
     </div>
     </form>
-    <!-- Code for possible email form
-      <form action="mailto:financial.success@usi.edu" id="emailForm" method="get" enctype="text/plain">
+    <!-- <form action="mailto:financial.success@usi.edu" id="emailForm" method="get" enctype="text/plain">
       Subject:<br>
       <input type="text" name="subject" id="emailText" placeholder="Your Name"><br><br>
       Email:<br>
@@ -101,6 +176,7 @@
       <textarea name="body" id="message" rows="5" cols="30" placeholder="Please provide your student id(if applicable) along with any questions"></textarea><br><br>
       <input type="submit" class="sfscbutton" id="closeForm" value="Send" onclick="hideForm()">
       <input type="button" class="sfscbutton" id="closeForm" value="Close" onclick="hideForm()">
+      
     </form> -->
     </fieldset>
     <script>
@@ -126,6 +202,7 @@
     var archiesBundle = sessionStorage.getItem("archiesBundle");
 
     </script>
+    
     </div>
     
   </script>

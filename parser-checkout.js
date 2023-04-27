@@ -8,8 +8,8 @@ var ExcelToJSON = function() {
    //parsing XLSX
    this.parseExcel = function() {
       return new Promise((resolve,reject) => {
-         var file = "https://usi-outreach-tsisc-safety-badge-system.s3.amazonaws.com/Public/SFSC/Fees.xlsx";
-
+         //var file = "https://usi-outreach-tsisc-safety-badge-system.s3.amazonaws.com/Public/SFSC/Fees.xlsx";
+         var file = "Fees.xlsx";
          var xhr = new XMLHttpRequest();
          xhr.open('GET', file, true);
          xhr.responseType = 'arraybuffer';

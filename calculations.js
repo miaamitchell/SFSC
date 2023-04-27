@@ -7,7 +7,6 @@ async function performcalc()
       var major = sessionStorage.getItem("mjrSelect");
       var majorData = majorDictionary[major];
       var fileModified = lastModified;
-      console.log('File Modified: '+lastModified);
 
       var estimatedAid = sessionStorage.getItem("estimatedAid");
       var creditHours = sessionStorage.getItem("creditHours");
@@ -41,7 +40,7 @@ async function performcalc()
    }
 
    //Transportation/Parking Fee
-   if(inPersonClasses > 1) {
+   if(inPersonClasses > 0) {
       transportationFee = Number(majorData[0]['Transportation']);
    } else {
       transportationFee = 0;
@@ -63,7 +62,7 @@ async function performcalc()
 
    //Fees for first-semester students:
    //Assessment Fee, Enrollment Fee, Matriculation Fee
-   if(firstSemester) {
+   if(firstSemester == "Yes") {
       assessmentFee = Number(majorData[0]['AssessmentFee']);
       enrollmentFee = Number(majorData[0]['EnrollmentFee']);
       matriculationFee = Number(majorData[0]['MatriculationFee']);
@@ -88,14 +87,14 @@ async function performcalc()
    }
 
    //Non-resident Distance Education Fee
-   if(inState == false && totalClasses == onlineClasses) {
+   if(inState == "No" && onlineClasses > 0 && hybridClasses == 0 && inPersonClasses == 0) {
       distanceFee = Number((majorData[0]['NonresDistanceEdFee']) * creditHours);
    } else {
       distanceFee = 0;
    }
 
    //Housing Activity Fee & Deaconess Plan
-   if(housingPlan) {
+   if(housingPlan != "Living Off-Campus") {
       housingActivityFee = Number(majorData[0]['HousingStudentActivityFee']);
       deaconessPlan = Number(majorData[0]['DeaconessPlan']);
    } else {
@@ -121,7 +120,7 @@ async function performcalc()
    athleticsFee = Number(majorData[0]['AthleticsFee']);
 
    //Total Semester Cost for Major
-   majorCost = costPerCreditHr+univServiceFee+programFee+studentActivityFee+counselingFee+transportationFee+assessmentFee+enrollmentFee+matriculationFee+onlineFee+hybridFee+housingActivityFee+deaconessPlan+archieFee+athleticsFee;
+   majorCost = costPerCreditHr+univServiceFee+programFee+studentActivityFee+counselingFee+transportationFee+assessmentFee+enrollmentFee+matriculationFee+onlineFee+hybridFee+housingActivityFee+deaconessPlan+archieFee+athleticsFee,distanceFee;
 
    //assigning housingData as information from housingDictionary based on user's selected housingPlan
    var housingData = housingDictionary[housingPlan];
@@ -139,16 +138,26 @@ async function performcalc()
    grandTotal = totalCost - estimatedAid;
 
    //showing fees/costs in Post-CalcSFSC.html based on element id
-   document.getElementById("credithrcostid").innerHTML = "Cost for Desired Credit Hours: $"+majorCost;
-   document.getElementById("univserviceid").innerHTML = "University Service Fee: $"+univServiceFee;
-   document.getElementById("transportationid").innerHTML = "Transportation/Parking Fee: $"+transportationFee;
-   document.getElementById("studentactivityid").innerHTML = "Student Activity Fee: $"+studentActivityFee;
-   document.getElementById("archiebundleid").innerHTML = "Archie's Book Bundle: $"+archieFee;
-   document.getElementById("housingplanid").innerHTML = "Housing Costs: $"+housingCost;
-   document.getElementById("deaconessid").innerHTML = "Deaconess Plan: $"+deaconessPlan;
-   document.getElementById("mealplanid").innerHTML = "Meal Plan: $"+mealPlanCost;
-   document.getElementById("totalcostid").innerHTML = "Total Cost: $"+totalCost;
-   document.getElementById("aidid").innerHTML = "Estimated Financial Aid: $"+estimatedAid;
+   document.getElementById("credithrcostid").innerHTML = "Cost for Desired Credit Hours: $"+costPerCreditHr.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("programfeeid").innerHTML = "Program Fee: $"+programFee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("counselingfeeid").innerHTML = "Counseling Fee: $"+counselingFee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("assessmentfeeid").innerHTML = "Assessment Fee: $"+assessmentFee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("enrollmentfeeid").innerHTML = "Enrollment Fee: $"+enrollmentFee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("matriculationfeeid").innerHTML = "Matriculation Fee: $"+matriculationFee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("onlinefeeid").innerHTML = "Online Learning Fee: $"+onlineFee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("hybridfeeid").innerHTML = "Hybrid Learning Fee: $"+hybridFee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("housingactivityfeeid").innerHTML = "Housing Student Activity Fee: $"+housingActivityFee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("athleticsfeeid").innerHTML = "Athletics Fee: $"+athleticsFee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("distancefeeid").innerHTML = "Nonresident Distance Education Fee: $"+distanceFee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("univserviceid").innerHTML = "University Service Fee: $"+univServiceFee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("transportationid").innerHTML = "Transportation/Parking Fee: $"+transportationFee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("studentactivityid").innerHTML = "Student Activity Fee: $"+studentActivityFee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("archiebundleid").innerHTML = "Archie's Book Bundle: $"+archieFee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("housingplanid").innerHTML = "Housing Costs: $"+housingCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("deaconessid").innerHTML = "Deaconess Plan: $"+deaconessPlan.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("mealplanid").innerHTML = "Meal Plan: $"+mealPlanCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("totalcostid").innerHTML = "Total Cost: $"+totalCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+   document.getElementById("aidid").innerHTML = "Estimated Financial Aid: $"+Number(estimatedAid).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
    document.getElementById("fileupdated").innerHTML = "Fees and costs updated as of: "+fileModified;
    
    var totalOutput = document.getElementById("grandtotalid");
@@ -161,16 +170,17 @@ async function performcalc()
    }
    else {
       totalOutput.style.color = "green";
-      descriptor = "Estimated Rebate";
+      descriptor = "Estimated Credit";
    }
-   totalOutput.innerText = descriptor +": $"+Math.abs(grandTotal).toFixed(2);
+   totalOutput.innerText = descriptor + ": $" + Math.abs(grandTotal).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 }  
-
+/* //hiding and showing possible emailForm
 function hideForm() {
    document.getElementById("emailForm").style.display = "none";
 }
 function showForm() {
    document.getElementById("emailForm").style.display = "block";
 }
+*/
 
 performcalc();
