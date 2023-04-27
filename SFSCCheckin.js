@@ -122,32 +122,6 @@ function validateForm(){
 document.getElementById("regForm").addEventListener("submit", function(event) {
   event.preventDefault();
 
-  /*
-  // Get the selected values from the select menus
-  const creditHours = parseInt(creditHoursSelect.value);
-  const inPersonClasses = parseInt(inPersonClassesSelect.value);
-  const onlineClasses = parseInt(onlineClassesSelect.value);
-  const firstSemester = true;
-  const hybridClasses = parseInt(hybridClassesSelect.value);
-  const estimatedAid = parseInt(estimatedAidSelect.value);
-  const mjrSelect = true;
-  const InRes = true; 
-  const oneHundred = parseInt(selectedoneHundredSelect.value);
-  const twoHundred = parseInt(selectedtwoHundredSelect.value);
-  const threeHundred = parseInt(selectedthreeHundred.value);
-  const fourHundred = parseInt(selectedfourHundred.value);
-  const mealPlan = true;
-  const housingPlan = true;
-  const archiesBundle = true;
-  
-
-  // Check that credit hours are greater than 0
-  if (inPersonClasses+onlineClasses+hybridClasses == 0) {
-    alert("Please select a number of credit hours greater than 0.");
-    return;
-  }
-  */
-
   // If validation passes, submit the form
   form.submit();
 });

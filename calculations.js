@@ -3,7 +3,7 @@ async function performcalc()
       const excelToJSON = new ExcelToJSON();
       await excelToJSON.parseExcel();
 
-      //getting user selections
+      //getting user selections from SFSCCheckin.html
       var major = sessionStorage.getItem("mjrSelect");
       var majorData = majorDictionary[major];
       var fileModified = lastModified;
@@ -134,6 +134,7 @@ async function performcalc()
 
    //Total Cost for Semester
    totalCost = majorCost+housingCost+mealPlanCost;
+   
    //Estimated Balance
    grandTotal = totalCost - estimatedAid;
 
@@ -161,6 +162,7 @@ async function performcalc()
    document.getElementById("fileupdated").innerHTML = "Fees and costs updated as of: "+fileModified;
    
    var totalOutput = document.getElementById("grandtotalid");
+   //text before grandTotal variable
    var descriptor;
 
    //changing grand total to rebate(green) or cost(red)
